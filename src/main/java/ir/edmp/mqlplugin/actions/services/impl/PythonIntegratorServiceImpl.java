@@ -69,13 +69,6 @@ public class PythonIntegratorServiceImpl implements PythonIntegratorService {
                 displayErrorMessage();
             }
 
-            Document currentDoc = FileEditorManager.getInstance(moduleProject).getSelectedTextEditor().getDocument();
-            String fileExtension = PsiDocumentManager.getInstance(moduleProject).getPsiFile(currentDoc).getOriginalFile().getVirtualFile().getExtension();
-            boolean isFileJava = fileExtension.equals(JAVA_EXTENSION);
-            if (isFileJava) {
-                return true;
-            }
-
             File resultFile = new File(projectsLocation + "\\logs\\result.txt");
             if (resultFile.exists()) {
                 FileReader resultFileReader = new FileReader(projectsLocation + "\\logs\\result.txt");
@@ -89,6 +82,7 @@ public class PythonIntegratorServiceImpl implements PythonIntegratorService {
 
                 ToolWindow toolWindow = ToolWindowManager.getInstance(moduleProject).getToolWindow("MQL");
                 JTextArea resultTextArea = new JTextArea(result.toString());
+                resultTextArea.setEditable(false);
                 resultTextArea.setLineWrap(true);
                 resultTextArea.setWrapStyleWord(true);
                 JBScrollPane scrollPane = new JBScrollPane(resultTextArea);
@@ -110,8 +104,12 @@ public class PythonIntegratorServiceImpl implements PythonIntegratorService {
 
     protected void readProperties() {
         FileService fileService = FileServiceImpl.getInstance(moduleProject);
-        username = fileService.read(USERNAME);
-        password = fileService.read(PASSWORD);
-        projectsLocation = fileService.read(PROJECTS_LOCATION);
+        try {
+            username = fileService.read(USERNAME);
+            password = fileService.read(PASSWORD);
+            projectsLocation = fileService.read(PROJECTS_LOCATION);
+        } catch (IOException e) {
+            Messages.showErrorDialog(e.getMessage(), "Error");
+        }
     }
 }

@@ -8,7 +8,7 @@
     <name>RunMQL</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="matin.parsapour.iam@gmail.com" url="https://www.yourcompany.com">Matin</vendor>
+    <vendor email="matin.parsapour.iam@gmail.com">Matin</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
@@ -31,6 +31,7 @@
         </action>
     </actions>
     <extensions defaultExtensionNs="com.intellij">
+        <moduleBuilder builderClass="ir.edmp.mqlplugin.actions.builder.ConfigurationModuleBuilder"/>
         <postStartupActivity implementation="ir.edmp.mqlplugin.actions.listener.startup.PropertiesFile"/>
         <toolWindow id="MQL" secondary="true" icon="AllIcons.Toolwindows.WebToolWindow" anchor="right"
                     factoryClass="ir.edmp.mqlplugin.actions.toolWindow.MQLDashboard"/>

@@ -20,6 +20,8 @@ public class MQLAction extends AnAction {
         Project moduleProject = event.getProject();
         Document currentDoc = FileEditorManager.getInstance(moduleProject).getSelectedTextEditor().getDocument();
         String fileExtension = PsiDocumentManager.getInstance(moduleProject).getPsiFile(currentDoc).getOriginalFile().getVirtualFile().getExtension();
+
+        // Check if file is java then insert it if its mql then run it
         boolean isFileJava = fileExtension.equals(JAVA_EXTENSION);
         boolean isFileMQL = fileExtension.equals(MQL_EXTENSION);
         ProjectsMainService mainService = new ProjectsMainServiceImpl(event.getProject());

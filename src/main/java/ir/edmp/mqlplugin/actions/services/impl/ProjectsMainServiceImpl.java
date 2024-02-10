@@ -4,6 +4,7 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.PsiDocumentManager;
 import ir.edmp.mqlplugin.actions.services.FileService;
 import ir.edmp.mqlplugin.actions.services.MQLService;
@@ -11,6 +12,8 @@ import ir.edmp.mqlplugin.actions.services.ProjectService;
 import ir.edmp.mqlplugin.actions.services.ProjectsMainService;
 import ir.edmp.mqlplugin.actions.services.impl.properties.PropertiesMainServiceImpl;
 import ir.edmp.mqlplugin.actions.services.properties.PropertiesMainService;
+
+import java.io.IOException;
 
 import static ir.edmp.mqlplugin.actions.constants.Constant.*;
 
@@ -81,9 +84,16 @@ public class ProjectsMainServiceImpl implements ProjectsMainService {
 
 	private boolean checkConfigFile() {
 		FileService fileService = FileServiceImpl.getInstance(moduleProject);
-		String username = fileService.read(USERNAME);
-		String password = fileService.read(PASSWORD);
-		String location = fileService.read(PROJECTS_LOCATION);
+		String username = null;
+		String password = null;
+		String location = null;
+		try {
+			username = fileService.read(USERNAME);
+			password = fileService.read(PASSWORD);
+			location = fileService.read(PROJECTS_LOCATION);
+		} catch (IOException exception) {
+			Messages.showErrorDialog(exception.getMessage(), "Error");
+		}
 
 		PropertiesMainService dialogMainService = new PropertiesMainServiceImpl(location, username, password);
 		return dialogMainService.startChecking();

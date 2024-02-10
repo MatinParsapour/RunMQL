@@ -1,19 +1,25 @@
 package ir.edmp.mqlplugin.actions.services.impl;
 
+import com.intellij.ide.highlighter.ModuleFileType;
+import com.intellij.ide.util.projectWizard.ModuleBuilder;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.module.ModuleTypeId;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModifiableModelsProvider;
+import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.Messages;
+import ir.edmp.mqlplugin.actions.builder.ConfigurationModuleBuilder;
 import ir.edmp.mqlplugin.actions.services.FileService;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 import static ir.edmp.mqlplugin.actions.constants.Constant.*;
 
@@ -31,6 +37,10 @@ public class FileServiceImpl implements FileService {
         }
     }
 
+    /**
+     * In module "Configuration" creates new properties file and put three properties
+     * @throws IOException
+     */
     private void createConfigFile() throws IOException {
         boolean isNewFileCreated = checkConfigurationFile();
         if (!isNewFileCreated) {
@@ -43,6 +53,11 @@ public class FileServiceImpl implements FileService {
         write(properties);
     }
 
+    /**
+     * Singleton design pattern to return only on instance of file service
+     * @param moduleProject
+     * @return
+     */
     public static FileService getInstance(Project moduleProject) {
         FileServiceImpl.moduleProject = moduleProject;
         System.out.println(moduleProject);
@@ -54,12 +69,19 @@ public class FileServiceImpl implements FileService {
     }
 
     private static boolean checkConfigurationFile() throws IOException {
-        String workspacePath = ModuleRootManager.getInstance(ModuleManager.getInstance(moduleProject).findModuleByName(CONFIGURATION_MODULE)).getSourceRoots()[0].getPath();
+        File configurationModulePath = new File(new File(moduleProject.getBasePath()).getParentFile() + "\\" + CONFIGURATION_MODULE);
+        Module configurationModule = ModuleManager.getInstance(moduleProject).findModuleByName(CONFIGURATION_MODULE);
+        if (!configurationModulePath.exists()) {
+            Messages.showErrorDialog("No module name " + CONFIGURATION_MODULE + " found, please create this module.", "Error");
+            return false;
+        }
+
+        String workspacePath = ModuleRootManager.getInstance(configurationModule).getSourceRoots()[0].getPath();
         propertiesFile = new File(workspacePath + "\\Config.properties");
         return propertiesFile.createNewFile();
     }
     @Override
-    public String read(String key) {
+    public String read(String key) throws IOException{
         String propertyValue = null;
         try {
             Properties properties = new Properties();
@@ -71,7 +93,7 @@ public class FileServiceImpl implements FileService {
                 throw new IOException("No property " + key + " found in properties file");
             }
         } catch (IOException exception) {
-            Messages.showErrorDialog("Error, Unable to read properties file : \n" + exception, "Error");
+            throw new IOException("Error, Unable to read properties file : \n" + exception);
         }
         return propertyValue;
     }
