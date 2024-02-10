@@ -1,0 +1,38 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>ir.edmp.RunMQL</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>RunMQL</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="matin.parsapour.iam@gmail.com" url="https://www.yourcompany.com">Matin</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[This plugin insert program which has java extension and runs mqls which has mql extension, this plugin
+                        Adds a command named "Run MQL" to Tools menu]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+
+    </extensions>
+    <actions>
+        <action class="ir.edmp.mqlplugin.actions.MQLAction" id="runmql" text="Run MQL">
+            <add-to-group group-id="ToolsMenu" anchor="last"></add-to-group>
+        </action>
+    </actions>
+    <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="ir.edmp.mqlplugin.actions.listener.startup.PropertiesFile"/>
+        <toolWindow id="MQL" secondary="true" icon="AllIcons.Toolwindows.WebToolWindow" anchor="right"
+                    factoryClass="ir.edmp.mqlplugin.actions.toolWindow.MQLDashboard"/>
+    </extensions>
+</idea-plugin>
