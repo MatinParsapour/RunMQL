@@ -92,7 +92,7 @@ public class ProjectsMainServiceImpl implements ProjectsMainService {
 			password = fileService.read(PASSWORD);
 			location = fileService.read(PROJECTS_LOCATION);
 		} catch (IOException exception) {
-			Messages.showErrorDialog(exception.getMessage(), "Error");
+			Messages.showErrorDialog(exception.getMessage(), ERROR_RUN_MQL);
 		}
 
 		PropertiesMainService dialogMainService = new PropertiesMainServiceImpl(location, username, password);

@@ -3,6 +3,7 @@ package ir.edmp.mqlplugin.actions;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDocumentManager;
@@ -18,7 +19,13 @@ public class MQLAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent event) {
         Project moduleProject = event.getProject();
-        Document currentDoc = FileEditorManager.getInstance(moduleProject).getSelectedTextEditor().getDocument();
+        Editor editor = FileEditorManager.getInstance(moduleProject).getSelectedTextEditor();
+        boolean isThereEditor = editor == null;
+        if (isThereEditor) {
+            return;
+        }
+
+        Document currentDoc = editor.getDocument();
         String fileExtension = PsiDocumentManager.getInstance(moduleProject).getPsiFile(currentDoc).getOriginalFile().getVirtualFile().getExtension();
 
         // Check if file is java then insert it if its mql then run it

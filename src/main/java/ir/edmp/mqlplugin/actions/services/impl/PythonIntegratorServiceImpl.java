@@ -9,6 +9,7 @@ import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.ui.components.JBScrollPane;
+import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import ir.edmp.mqlplugin.actions.services.FileService;
 import ir.edmp.mqlplugin.actions.services.PythonIntegratorService;
@@ -45,22 +46,22 @@ public class PythonIntegratorServiceImpl implements PythonIntegratorService {
 
     protected boolean runActiveFile(String filePath, String projectName, String pythonFileName){
         try {
-            ProcessBuilder runPython = new ProcessBuilder("python", pythonFileName, "'" + filePath + "',"  + projectName + "," + this.password + "," + this.username);
-            runPython.directory(new File(this.projectsLocation));
-            Process processResult = runPython.start();
+            ProcessBuilder pythonProcess = new ProcessBuilder("python", pythonFileName, "'" + filePath + "',"  + projectName + "," + this.password + "," + this.username);
+            pythonProcess.directory(new File(this.projectsLocation));
+            Process processResult = pythonProcess.start();
             processResult.waitFor();
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(processResult.getErrorStream()));
-            StringBuilder builder = null;
-            while (reader.readLine() != null) {
-                builder = new StringBuilder();
-                builder.append(reader.readLine());
-                builder.append(System.getProperty("line.separator"));
+            BufferedReader processResultReader = new BufferedReader(new InputStreamReader(processResult.getErrorStream()));
+            StringBuilder runMQLErrorMessage = null;
+            while (processResultReader.readLine() != null) {
+                runMQLErrorMessage = new StringBuilder();
+                runMQLErrorMessage.append(processResultReader.readLine());
+                runMQLErrorMessage.append(System.getProperty("line.separator"));
             }
 
-            boolean isThereError = builder != null;
+            boolean isThereError = runMQLErrorMessage != null;
             if (isThereError) {
-                Messages.showErrorDialog("Error, running mql was not successful : " + builder, "Error");
+                Messages.showErrorDialog(ERROR_UNSUCCESSFUL_MQL_RUNNING + runMQLErrorMessage, ERROR_RUN_MQL);
                 return false;
             }
 
@@ -69,9 +70,9 @@ public class PythonIntegratorServiceImpl implements PythonIntegratorService {
                 displayErrorMessage();
             }
 
-            File resultFile = new File(projectsLocation + "\\logs\\result.txt");
+            File resultFile = new File(projectsLocation + DIRECTORY_LOGS + FILE_RESULT);
             if (resultFile.exists()) {
-                FileReader resultFileReader = new FileReader(projectsLocation + "\\logs\\result.txt");
+                FileReader resultFileReader = new FileReader(projectsLocation + DIRECTORY_LOGS + FILE_RESULT);
                 Scanner myReader = new Scanner(resultFileReader);
                 StringJoiner result = new StringJoiner("\n");
                 while(myReader.hasNextLine()) {
@@ -80,26 +81,34 @@ public class PythonIntegratorServiceImpl implements PythonIntegratorService {
                 }
                 resultFileReader.close();
 
-                ToolWindow toolWindow = ToolWindowManager.getInstance(moduleProject).getToolWindow("MQL");
                 JTextArea resultTextArea = new JTextArea(result.toString());
                 resultTextArea.setEditable(false);
                 resultTextArea.setLineWrap(true);
                 resultTextArea.setWrapStyleWord(true);
                 JBScrollPane scrollPane = new JBScrollPane(resultTextArea);
+
+                ToolWindow toolWindow = ToolWindowManager.getInstance(moduleProject).getToolWindow("MQL");
+                Document currentDoc = FileEditorManager.getInstance(moduleProject).getSelectedTextEditor().getDocument();
+                String fileName = PsiDocumentManager.getInstance(moduleProject).getPsiFile(currentDoc).getOriginalFile().getVirtualFile().getName();
+                Content content =  toolWindow.getContentManager().findContent(fileName);
+                boolean fileNameContentDoesNotExists = content == null;
                 ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-                toolWindow.getContentManager().removeAllContents(true);
-                toolWindow.getContentManager().addContent(contentFactory.createContent(scrollPane, "Result", false));
-                toolWindow.activate(null);
+                if (!fileNameContentDoesNotExists) {
+                    content.getManager().removeContent(content, true);
+                }
+                toolWindow.getContentManager().addContent(contentFactory.createContent(scrollPane, fileName, false));
+                content = toolWindow.getContentManager().findContent(fileName);
+                content.setPinnable(true);
             }
             return true;
         } catch (IOException | InterruptedException exception) {
-            Messages.showErrorDialog("Error, Insertion was not successful : \n" + exception, "Error");
+            Messages.showErrorDialog(ERROR_UNSUCCESSFUL_MQL_RUNNING + exception, ERROR_RUN_MQL);
             return false;
         }
     }
 
     protected void displayErrorMessage() throws IOException {
-        Messages.showErrorDialog("Error, Insertion was not successful : \nYou can see full log in " + projectsLocation + "\\logs\\insert_program.log", "Error");
+        Messages.showErrorDialog(ERROR_UNSUCCESSFUL_MQL_RUNNING + ERROR_SEE_FULL_LOG.replace("${PATH}",DIRECTORY_LOGS + FILE_INSERT_PROGRAM), ERROR_RUN_MQL);
     }
 
     protected void readProperties() {
@@ -109,7 +118,7 @@ public class PythonIntegratorServiceImpl implements PythonIntegratorService {
             password = fileService.read(PASSWORD);
             projectsLocation = fileService.read(PROJECTS_LOCATION);
         } catch (IOException e) {
-            Messages.showErrorDialog(e.getMessage(), "Error");
+            Messages.showErrorDialog(e.getMessage(), ERROR_RUN_MQL);
         }
     }
 }

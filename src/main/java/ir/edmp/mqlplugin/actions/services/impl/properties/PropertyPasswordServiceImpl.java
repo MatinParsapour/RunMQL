@@ -4,7 +4,7 @@ import com.intellij.openapi.ui.Messages;
 import ir.edmp.mqlplugin.actions.services.properties.PropertyPasswordService;
 import ir.edmp.mqlplugin.actions.services.properties.PropertyService;
 
-import static ir.edmp.mqlplugin.actions.constants.Constant.DEFAULT_PASSWORD;
+import static ir.edmp.mqlplugin.actions.constants.Constant.*;
 
 public class PropertyPasswordServiceImpl extends PropertyServiceImpl implements PropertyPasswordService {
 
@@ -17,7 +17,7 @@ public class PropertyPasswordServiceImpl extends PropertyServiceImpl implements 
 		String password = this.property;
 		boolean isPasswordFake = password.equals(DEFAULT_PASSWORD);
 		if (isPasswordFake) {
-			Messages.showErrorDialog( "Incorrect password : \nChange default password", "Error");
+			Messages.showErrorDialog( ERROR_DEFAULT_PASSWORD, ERROR_RUN_MQL);
 			return false;
 		}
 		

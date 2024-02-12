@@ -31,7 +31,6 @@
         </action>
     </actions>
     <extensions defaultExtensionNs="com.intellij">
-        <moduleBuilder builderClass="ir.edmp.mqlplugin.actions.builder.ConfigurationModuleBuilder"/>
         <postStartupActivity implementation="ir.edmp.mqlplugin.actions.listener.startup.PropertiesFile"/>
         <toolWindow id="MQL" secondary="true" icon="AllIcons.Toolwindows.WebToolWindow" anchor="right"
                     factoryClass="ir.edmp.mqlplugin.actions.toolWindow.MQLDashboard"/>

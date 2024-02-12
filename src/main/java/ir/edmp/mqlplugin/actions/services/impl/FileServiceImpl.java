@@ -12,7 +12,6 @@ import com.intellij.openapi.roots.ModifiableModelsProvider;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.Messages;
-import ir.edmp.mqlplugin.actions.builder.ConfigurationModuleBuilder;
 import ir.edmp.mqlplugin.actions.services.FileService;
 
 import java.io.File;
@@ -33,7 +32,7 @@ public class FileServiceImpl implements FileService {
         try {
             createConfigFile();
         } catch (IOException exception) {
-            Messages.showErrorDialog("Error, Unable to create properties file : \n" + exception, "Error");
+            Messages.showErrorDialog(ERROR_UNABLE_TO_CREATE_PROPERTIES_FILE + exception, ERROR_RUN_MQL);
         }
     }
 
@@ -72,16 +71,17 @@ public class FileServiceImpl implements FileService {
         File configurationModulePath = new File(new File(moduleProject.getBasePath()).getParentFile() + "\\" + CONFIGURATION_MODULE);
         Module configurationModule = ModuleManager.getInstance(moduleProject).findModuleByName(CONFIGURATION_MODULE);
         if (!configurationModulePath.exists()) {
-            Messages.showErrorDialog("No module name " + CONFIGURATION_MODULE + " found, please create this module.", "Error");
+            Messages.showErrorDialog(ERROR_CONFIGURATION_MODULE_NOT_FOUND, ERROR_RUN_MQL);
             return false;
         }
 
         String workspacePath = ModuleRootManager.getInstance(configurationModule).getSourceRoots()[0].getPath();
-        propertiesFile = new File(workspacePath + "\\Config.properties");
+        propertiesFile = new File(workspacePath + FILE_CONFIG);
         return propertiesFile.createNewFile();
     }
     @Override
     public String read(String key) throws IOException{
+        createConfigFile();
         String propertyValue = null;
         try {
             Properties properties = new Properties();
@@ -90,10 +90,10 @@ public class FileServiceImpl implements FileService {
             propertyValue = properties.getProperty(key);
             boolean isPropertyExists = propertyValue != null;
             if (!isPropertyExists) {
-                throw new IOException("No property " + key + " found in properties file");
+                throw new IOException(ERROR_KEY_NOT_FOUND.replace("${KEY}",key));
             }
         } catch (IOException exception) {
-            throw new IOException("Error, Unable to read properties file : \n" + exception);
+            throw new IOException(ERROR_UNABLE_TO_READ_PROPERTIES_FILE + exception);
         }
         return propertyValue;
     }
@@ -105,7 +105,7 @@ public class FileServiceImpl implements FileService {
             properties.load(reader);
             properties.setProperty(key, value);
         } catch (IOException exception) {
-            Messages.showErrorDialog( "Unable to write properties file : \n" + exception, "Error");
+            Messages.showErrorDialog( ERROR_UNABLE_TO_WRITE_PROPERTIES_FILE + exception, ERROR_RUN_MQL);
         }
     }
 
@@ -121,7 +121,7 @@ public class FileServiceImpl implements FileService {
             }
             configFile.store(writer, "Last Update : " + new Date());
         } catch (IOException exception) {
-            Messages.showErrorDialog( "Unable to write properties file : \n" + exception, "Error");
+            Messages.showErrorDialog( ERROR_UNABLE_TO_WRITE_PROPERTIES_FILE + exception, ERROR_RUN_MQL);
         }
 
     }

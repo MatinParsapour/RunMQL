@@ -4,7 +4,7 @@ import com.intellij.openapi.ui.Messages;
 import ir.edmp.mqlplugin.actions.services.properties.PropertyService;
 import ir.edmp.mqlplugin.actions.services.properties.PropertyUsernameService;
 
-import static ir.edmp.mqlplugin.actions.constants.Constant.DEFAULT_USERNAME;
+import static ir.edmp.mqlplugin.actions.constants.Constant.*;
 
 public class PropertyUsernameServiceImpl extends PropertyServiceImpl implements PropertyUsernameService {
 
@@ -17,13 +17,13 @@ public class PropertyUsernameServiceImpl extends PropertyServiceImpl implements 
 		String username = this.property;
 		boolean isUsernameEmpty = username.isEmpty();
 		if (isUsernameEmpty) {
-			Messages.showErrorDialog("Incorrect username : \nUsername can not be empty", "Error");
+			Messages.showErrorDialog(ERROR_EMPTY_USERNAME, ERROR_RUN_MQL);
 			return false;
 		}
 		
 		boolean isUsernameFake = username.equals(DEFAULT_USERNAME);
 		if (isUsernameFake) {
-			Messages.showErrorDialog( "Incorrect username : \nChange default username", "Error");
+			Messages.showErrorDialog( ERROR_DEFAULT_USERNAME, ERROR_RUN_MQL);
 			return false;
 		}
 		

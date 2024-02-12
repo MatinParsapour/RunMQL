@@ -17,9 +17,6 @@ public class MQLDashboard implements ToolWindowFactory, DumbAware {
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         MQLDashboardContent toolWindowContent = new MQLDashboardContent();
-        ContentFactory contentFactory = new ContentFactoryImpl();
-        Content content = contentFactory.createContent(toolWindowContent.getContentPanel(), "", false);
-        toolWindow.getContentManager().addContent(content);
     }
 
     private static class MQLDashboardContent {

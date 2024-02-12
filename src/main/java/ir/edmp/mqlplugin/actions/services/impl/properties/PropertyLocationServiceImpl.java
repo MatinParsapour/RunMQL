@@ -6,6 +6,8 @@ import ir.edmp.mqlplugin.actions.services.properties.PropertyService;
 
 import java.io.File;
 
+import static ir.edmp.mqlplugin.actions.constants.Constant.*;
+
 public class PropertyLocationServiceImpl extends PropertyServiceImpl implements PropertyLocationService {
 
 	public PropertyLocationServiceImpl(String property) {
@@ -17,14 +19,21 @@ public class PropertyLocationServiceImpl extends PropertyServiceImpl implements 
 		String location = this.property;
 		boolean isLocationEmpty = location.isEmpty();
 		if (isLocationEmpty) {
-			Messages.showErrorDialog( "Incorrect Directory : \nDirectory of projects can not be empty", "Error");
+			Messages.showErrorDialog( ERROR_EMPTY_DIRECTORY, ERROR_RUN_MQL);
 			return false;
 		}
-		
-		File file = new File(location + "\\insert_program.py");
-		boolean isDirectoryContainsPythonFile = file.exists();
-		if (!isDirectoryContainsPythonFile) {
-			Messages.showErrorDialog( "Incorrect Directory : \nThe directory must contains insert_program.py file", "Error");
+
+		File insertProgramFile = new File(location + "\\" + FILE_INSERT_PROGRAM);
+		boolean isDirectoryContainsInsertProgramFile = insertProgramFile.exists();
+		if (!isDirectoryContainsInsertProgramFile) {
+			Messages.showErrorDialog( ERROR_INCORRECT_DIRECTORY.replace("${FILE_NAME}",FILE_INSERT_PROGRAM), ERROR_RUN_MQL);
+			return false;
+		}
+
+		File runMQLFile = new File(location + "\\" + FILE_RUN_MQL);
+		boolean isDirectoryContainsRunMQLFile = runMQLFile.exists();
+		if (!isDirectoryContainsRunMQLFile) {
+			Messages.showErrorDialog( ERROR_INCORRECT_DIRECTORY.replace("${FILE_NAME}",FILE_RUN_MQL), ERROR_RUN_MQL);
 			return false;
 		}
 		
