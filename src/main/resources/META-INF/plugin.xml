@@ -27,12 +27,12 @@
     </extensions>
     <actions>
         <action class="ir.edmp.mqlplugin.actions.MQLAction" id="runmql" text="Run MQL">
-            <add-to-group group-id="ToolsMenu" anchor="last"></add-to-group>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
     </actions>
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity implementation="ir.edmp.mqlplugin.actions.listener.startup.PropertiesFile"/>
         <toolWindow id="MQL" secondary="true" icon="AllIcons.Toolwindows.WebToolWindow" anchor="right"
-                    factoryClass="ir.edmp.mqlplugin.actions.toolWindow.MQLDashboard"/>
+                    factoryClass="ir.edmp.mqlplugin.actions.toolWindow.MQLDashboard" canCloseContents="true"/>
     </extensions>
 </idea-plugin>

@@ -97,8 +97,7 @@ public class PythonIntegratorServiceImpl implements PythonIntegratorService {
                     content.getManager().removeContent(content, true);
                 }
                 toolWindow.getContentManager().addContent(contentFactory.createContent(scrollPane, fileName, false));
-                content = toolWindow.getContentManager().findContent(fileName);
-                content.setPinnable(true);
+                toolWindow.getContentManager().findContent(fileName);
             }
             return true;
         } catch (IOException | InterruptedException exception) {

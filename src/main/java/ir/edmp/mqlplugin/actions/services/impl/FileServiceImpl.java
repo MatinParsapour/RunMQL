@@ -59,7 +59,6 @@ public class FileServiceImpl implements FileService {
      */
     public static FileService getInstance(Project moduleProject) {
         FileServiceImpl.moduleProject = moduleProject;
-        System.out.println(moduleProject);
         boolean isInstanceExists = instance != null;
         if (!isInstanceExists) {
             instance = new FileServiceImpl();
