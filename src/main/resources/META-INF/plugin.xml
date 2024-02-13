@@ -36,6 +36,9 @@
         <action icon="/assets/trigger.png" class="ir.edmp.mqlplugin.actions.TriggerAction" id="addtriggerscript" text="Trigger">
             <add-to-group group-id="MQLMenu" anchor="last"/>
         </action>
+        <action icon="/assets/notification.png" class="ir.edmp.mqlplugin.actions.NotificationAction" id="addnotificationscript" text="Notification">
+            <add-to-group group-id="MQLMenu" anchor="last"/>
+        </action>
     </actions>
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity implementation="ir.edmp.mqlplugin.listener.startup.PropertiesFile"/>
