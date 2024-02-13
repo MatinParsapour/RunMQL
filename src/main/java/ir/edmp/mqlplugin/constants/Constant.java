@@ -13,10 +13,15 @@ public class Constant {
 
 	public static final String DIRECTORY_LOGS = "\\logs\\";
 
+	// Warnings
+	public static final String WARNING = "Warning";
+	public static final String WARNING_OVERWRITE_DOCUMENT = "Do you want to overwrite script in current file?";
+
 
 	// Errors
 	public static final String ERROR_RUN_MQL = "Run MQL Error";
 	public static final String ERROR_TRIGGER = "Trigger Script Error";
+	public static final String ERROR_INCORRECT_SEQUENCE_NUMBER_FORMAT  = "Sequence Number format is not numeric";
 	public static final String ERROR_NO_MQL_FILE_FOUND = "Active file is not an MQL file, select an MQL file and try again";
 	public static final String ERROR_EMPTY_DIRECTORY = "Incorrect Directory : \nDirectory of projects can not be empty";
 	public static final String ERROR_INCORRECT_DIRECTORY = "Incorrect Directory : \nThe directory must contains ${FILE_NAME} file";
