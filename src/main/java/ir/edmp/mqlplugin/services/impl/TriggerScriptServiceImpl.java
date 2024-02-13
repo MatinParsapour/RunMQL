@@ -38,6 +38,7 @@ public class TriggerScriptServiceImpl extends ScriptServiceImpl implements Trigg
                 .add(getArg13())
                 .add(getArg14())
                 .add(getArg15())
+                .add(getCurrent())
                 .toString();
     }
 
