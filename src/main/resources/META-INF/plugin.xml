@@ -30,6 +30,9 @@
         <group text="MQL Tools" id="MQLMenu" popup="true">
             <add-to-group group-id="ToolsMenu"/>
         </group>
+        <action icon="/assets/configuration.png" class="ir.edmp.mqlplugin.actions.ConfigurationAction" id="runmqlsettings" text="Run MQL Settings">
+            <add-to-group group-id="MQLMenu" anchor="last"/>
+        </action>
         <action icon="/assets/run-command.png" class="ir.edmp.mqlplugin.actions.MQLAction" id="runmql" text="Run MQL">
             <add-to-group group-id="MQLMenu" anchor="last"/>
         </action>
