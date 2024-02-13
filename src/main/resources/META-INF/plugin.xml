@@ -25,14 +25,18 @@
     <extensions defaultExtensionNs="com.intellij">
 
     </extensions>
+
     <actions>
-        <action class="ir.edmp.mqlplugin.actions.MQLAction" id="runmql" text="Run MQL">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        <group text="MQL Tools" id="MQLMenu" popup="true">
+            <add-to-group group-id="ToolsMenu"/>
+        </group>
+        <action icon="/assets/run-command.png" class="ir.edmp.mqlplugin.actions.MQLAction" id="runmql" text="Run MQL">
+            <add-to-group group-id="MQLMenu" anchor="last"/>
         </action>
     </actions>
     <extensions defaultExtensionNs="com.intellij">
-        <postStartupActivity implementation="ir.edmp.mqlplugin.actions.listener.startup.PropertiesFile"/>
+        <postStartupActivity implementation="ir.edmp.mqlplugin.listener.startup.PropertiesFile"/>
         <toolWindow id="MQL" secondary="true" icon="AllIcons.Toolwindows.WebToolWindow" anchor="right"
-                    factoryClass="ir.edmp.mqlplugin.actions.toolWindow.MQLDashboard" canCloseContents="true"/>
+                    factoryClass="ir.edmp.mqlplugin.toolWindow.MQLDashboard" canCloseContents="true"/>
     </extensions>
 </idea-plugin>

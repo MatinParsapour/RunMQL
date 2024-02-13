@@ -7,12 +7,12 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDocumentManager;
-import ir.edmp.mqlplugin.actions.services.ProjectsMainService;
-import ir.edmp.mqlplugin.actions.services.impl.ProjectsMainServiceImpl;
+import ir.edmp.mqlplugin.services.ProjectsMainService;
+import ir.edmp.mqlplugin.services.impl.ProjectsMainServiceImpl;
 import org.jetbrains.annotations.NotNull;
 
-import static ir.edmp.mqlplugin.actions.constants.Constant.JAVA_EXTENSION;
-import static ir.edmp.mqlplugin.actions.constants.Constant.MQL_EXTENSION;
+import static ir.edmp.mqlplugin.constants.Constant.JAVA_EXTENSION;
+import static ir.edmp.mqlplugin.constants.Constant.MQL_EXTENSION;
 
 public class MQLAction extends AnAction {
 
