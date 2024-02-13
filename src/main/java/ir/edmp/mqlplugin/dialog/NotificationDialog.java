@@ -11,30 +11,29 @@ public class NotificationDialog extends DialogWrapper {
 
 
 
-    private JTextField name = new JTextField();
-    private JTextField revision = new JTextField();
-    private JTextField bodyHTML = new JTextField();
-    private JTextField bodyText = new JTextField();
-    private JTextField dynamicBCCList = new JTextField();
-    private JTextField dynamicCCList = new JTextField();
-    private JTextField dynamicToList = new JTextField();
-    private JTextField filter = new JTextField();
-    private JTextField fromAgent = new JTextField();
-    private JTextField consolidationJPO = new JTextField();
-    private JTextField attachments = new JTextField();
-    private JTextField preprocessesJPO = new JTextField();
-    private JTextField registeredSuite = new JTextField();
-    private JTextField replyTo = new JTextField();
-    private JTextField staticBCCList = new JTextField();
-    private JTextField staticCCList = new JTextField();
-    private JTextField staticToList = new JTextField();
-    private JTextField subjectText = new JTextField();
-    private JTextField urlSuffix = new JTextField();
-    private JPanel panel;
+    private final JTextField name = new JTextField();
+    private final JTextField revision = new JTextField();
+    private final JTextField bodyHTML = new JTextField();
+    private final JTextField bodyText = new JTextField();
+    private final JTextField dynamicBCCList = new JTextField();
+    private final JTextField dynamicCCList = new JTextField();
+    private final JTextField dynamicToList = new JTextField();
+    private final JTextField filter = new JTextField();
+    private final JTextField fromAgent = new JTextField();
+    private final JTextField consolidationJPO = new JTextField();
+    private final JTextField attachments = new JTextField();
+    private final JTextField preprocessesJPO = new JTextField();
+    private final JTextField registeredSuite = new JTextField();
+    private final JTextField replyTo = new JTextField();
+    private final JTextField staticBCCList = new JTextField();
+    private final JTextField staticCCList = new JTextField();
+    private final JTextField staticToList = new JTextField();
+    private final JTextField subjectText = new JTextField();
+    private final JTextField urlSuffix = new JTextField();
 
     public NotificationDialog() {
         super(true); // use current window as parent
-        setTitle("Trigger Attributes");
+        setTitle("Notification Attributes");
         init();
     }
 

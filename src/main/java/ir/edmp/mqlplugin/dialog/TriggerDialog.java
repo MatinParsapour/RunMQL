@@ -9,27 +9,26 @@ import java.awt.*;
 
 public class TriggerDialog extends DialogWrapper {
 
-    private JTextField name = new JTextField();
-    private JTextField revision = new JTextField();
-    private JTextField programName = new JTextField();
-    private JTextField sequenceNumber = new JTextField();
-    private JTextField methodName = new JTextField();
-    private JTextField arg1 = new JTextField();
-    private JTextField arg2 = new JTextField();
-    private JTextField arg3 = new JTextField();
-    private JTextField arg4 = new JTextField();
-    private JTextField arg5 = new JTextField();
-    private JTextField arg6 = new JTextField();
-    private JTextField arg7 = new JTextField();
-    private JTextField arg8 = new JTextField();
-    private JTextField arg9 = new JTextField();
-    private JTextField arg10 = new JTextField();
-    private JTextField arg11 = new JTextField();
-    private JTextField arg12 = new JTextField();
-    private JTextField arg13 = new JTextField();
-    private JTextField arg14 = new JTextField();
-    private JTextField arg15 = new JTextField();
-    private JPanel panel;
+    private final JTextField name = new JTextField();
+    private final JTextField revision = new JTextField();
+    private final JTextField programName = new JTextField();
+    private final JTextField sequenceNumber = new JTextField();
+    private final JTextField methodName = new JTextField();
+    private final JTextField arg1 = new JTextField();
+    private final JTextField arg2 = new JTextField();
+    private final JTextField arg3 = new JTextField();
+    private final JTextField arg4 = new JTextField();
+    private final JTextField arg5 = new JTextField();
+    private final JTextField arg6 = new JTextField();
+    private final JTextField arg7 = new JTextField();
+    private final JTextField arg8 = new JTextField();
+    private final JTextField arg9 = new JTextField();
+    private final JTextField arg10 = new JTextField();
+    private final JTextField arg11 = new JTextField();
+    private final JTextField arg12 = new JTextField();
+    private final JTextField arg13 = new JTextField();
+    private final JTextField arg14 = new JTextField();
+    private final JTextField arg15 = new JTextField();
 
     public TriggerDialog() {
         super(true); // use current window as parent

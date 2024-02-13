@@ -53,71 +53,71 @@ public class NotificationScriptServiceImpl extends ScriptServiceImpl implements 
         return "vault \"eService Administration\" ";
     }
 
-    public String getBodyHTML() {
+    private String getBodyHTML() {
         return "\"Body HTML\" \"" + notificationDialog.getBodyHTML() + "\" ";
     }
 
-    public String getBodyText() {
+    private String getBodyText() {
         return "\"Body Text\" \"" + notificationDialog.getBodyText() + "\" ";
     }
 
-    public String getDynamicBCCList() {
+    private String getDynamicBCCList() {
         return "\"Dynamic BCC List\" \"" + notificationDialog.getDynamicBCCList() + "\" ";
     }
 
-    public String getDynamicCCList() {
+    private String getDynamicCCList() {
         return "\"Dynamic CC List\" \"" + notificationDialog.getDynamicCCList() + "\" ";
     }
 
-    public String getDynamicToList() {
+    private String getDynamicToList() {
         return "\"Dynamic To List\"\"" + notificationDialog.getDynamicToList() + "\" ";
     }
 
-    public String getFilter() {
+    private String getFilter() {
         return "\"Filter\" \"" + notificationDialog.getFilter() + "\" ";
     }
 
-    public String getFromAgent() {
+    private String getFromAgent() {
         return "\"From Agent\" \"" + notificationDialog.getFromAgent() + "\" ";
     }
 
-    public String getConsolidationJPO() {
+    private String getConsolidationJPO() {
         return "\"Consolidation JPO\" \"" + notificationDialog.getConsolidationJPO() + "\" ";
     }
 
-    public String getAttachments() {
+    private String getAttachments() {
         return "\"Attachments\" \"" + notificationDialog.getAttachments() + "\" ";
     }
 
-    public String getPreprocessesJPO() {
-        return "\"Preprocesses JPO\" \"" + notificationDialog.getPreprocessesJPO() + "\" ";
+    private String getPreprocessesJPO() {
+        return "\"Preprocess JPO\" \"" + notificationDialog.getPreprocessesJPO() + "\" ";
     }
 
-    public String getRegisteredSuite() {
+    private String getRegisteredSuite() {
         return "\"Registered Suite\" \"" + notificationDialog.getRegisteredSuite() + "\" ";
     }
 
-    public String getReplyTo() {
+    private String getReplyTo() {
         return "\"Reply To\" \"" + notificationDialog.getReplyTo() + "\" ";
     }
 
-    public String getStaticBCCList() {
+    private String getStaticBCCList() {
         return "\"Static BCC List\" \"" + notificationDialog.getStaticBCCList() + "\" ";
     }
 
-    public String getStaticCCList() {
+    private String getStaticCCList() {
         return "\"Static CC List\" \"" + notificationDialog.getStaticCCList() + "\" ";
     }
 
-    public String getStaticToList() {
+    private String getStaticToList() {
         return "\"Static To List\" \"" + notificationDialog.getStaticToList() + "\" ";
     }
 
-    public String getSubjectText() {
+    private String getSubjectText() {
         return "\"Subject Text\" \"" + notificationDialog.getSubjectText() + "\" ";
     }
 
-    public String getUrlSuffix() {
+    private String getUrlSuffix() {
         return "\"URL Suffix\" \"" + notificationDialog.getUrlSuffix() + "\" ";
     }
 

@@ -9,15 +9,15 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.PsiDocumentManager;
-import ir.edmp.mqlplugin.dialog.NotificationDialog;
-import ir.edmp.mqlplugin.dialog.TriggerDialog;
+import ir.edmp.mqlplugin.dialog.SystemHandlerDialog;
 import ir.edmp.mqlplugin.services.ScriptService;
-import ir.edmp.mqlplugin.services.impl.NotificationScriptServiceImpl;
+import ir.edmp.mqlplugin.services.impl.SystemHandlerScriptServiceImpl;
+import ir.edmp.mqlplugin.services.impl.TriggerScriptServiceImpl;
 import org.jetbrains.annotations.NotNull;
 
 import static ir.edmp.mqlplugin.constants.Constant.*;
 
-public class NotificationAction extends AnAction {
+public class SystemHandlerAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent event) {
         Project moduleProject = event.getProject();
@@ -33,8 +33,8 @@ public class NotificationAction extends AnAction {
         if (!isFileMQL) {
             Messages.showErrorDialog(ERROR_NO_MQL_FILE_FOUND, ERROR_TRIGGER);
         } else {
-            NotificationDialog notificationDialog = new NotificationDialog();
-            boolean isDialogOk = notificationDialog.showAndGet();
+            SystemHandlerDialog systemHandlerDialog = new SystemHandlerDialog();
+            boolean isDialogOk = systemHandlerDialog.showAndGet();
             if (isDialogOk) {
                 boolean isFileDirty = currentDoc.getTextLength() > 0;
                 if (isFileDirty) {
@@ -43,7 +43,7 @@ public class NotificationAction extends AnAction {
                         WriteCommandAction.runWriteCommandAction(moduleProject, () -> currentDoc.setText(""));
                     }
                 }
-                ScriptService scriptService = new NotificationScriptServiceImpl(notificationDialog);
+                ScriptService scriptService = new SystemHandlerScriptServiceImpl(systemHandlerDialog);
                 String script = scriptService.generateScript();
                 WriteCommandAction.runWriteCommandAction(moduleProject, () -> currentDoc.insertString(currentDoc.getTextLength(), "\n" + script));
             }
