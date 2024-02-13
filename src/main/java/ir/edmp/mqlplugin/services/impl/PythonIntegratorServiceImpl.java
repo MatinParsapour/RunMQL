@@ -21,7 +21,7 @@ import java.util.StringJoiner;
 
 import static ir.edmp.mqlplugin.constants.Constant.*;
 
-public class PythonIntegratorServiceImpl implements PythonIntegratorService {
+public class PythonIntegratorServiceImpl extends ServiceImpl implements PythonIntegratorService {
 
     protected String projectsLocation = null;
     protected String username =  null;

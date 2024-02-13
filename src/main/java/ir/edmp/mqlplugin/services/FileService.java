@@ -3,7 +3,7 @@ package ir.edmp.mqlplugin.services;
 import java.io.IOException;
 import java.util.Map;
 
-public interface FileService {
+public interface FileService extends Service {
 
     String read(String key) throws IOException;
 

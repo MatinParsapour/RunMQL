@@ -1,6 +1,8 @@
 package ir.edmp.mqlplugin.services.properties;
 
-public interface PropertiesService {
+import ir.edmp.mqlplugin.services.Service;
+
+public interface PropertiesService extends Service {
 
 	PropertyService linkComponent(PropertyService... propertyServices);
 }

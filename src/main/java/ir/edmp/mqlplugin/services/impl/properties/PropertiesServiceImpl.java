@@ -1,9 +1,10 @@
 package ir.edmp.mqlplugin.services.impl.properties;
 
+import ir.edmp.mqlplugin.services.impl.ServiceImpl;
 import ir.edmp.mqlplugin.services.properties.PropertiesService;
 import ir.edmp.mqlplugin.services.properties.PropertyService;
 
-public class PropertiesServiceImpl implements PropertiesService {
+public class PropertiesServiceImpl extends ServiceImpl implements PropertiesService {
 
 	@Override
 	public PropertyService linkComponent(PropertyService... edmpPropertyServices) {

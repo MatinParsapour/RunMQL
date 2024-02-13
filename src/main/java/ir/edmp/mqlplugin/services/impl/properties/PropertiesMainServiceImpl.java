@@ -1,10 +1,11 @@
 package ir.edmp.mqlplugin.services.impl.properties;
 
+import ir.edmp.mqlplugin.services.impl.ServiceImpl;
 import ir.edmp.mqlplugin.services.properties.PropertiesMainService;
 import ir.edmp.mqlplugin.services.properties.PropertiesService;
 import ir.edmp.mqlplugin.services.properties.PropertyService;
 
-public class PropertiesMainServiceImpl implements PropertiesMainService {
+public class PropertiesMainServiceImpl extends ServiceImpl implements PropertiesMainService {
 	private final String locationProperty;
 	private final String usernameProperty;
 	private final String passwordProperty;

@@ -1,6 +1,6 @@
 package ir.edmp.mqlplugin.services;
 
-public interface ProjectsMainService {
+public interface ProjectsMainService extends Service {
 
 	boolean importJPO();
 

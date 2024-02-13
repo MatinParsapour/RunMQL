@@ -1,6 +1,8 @@
 package ir.edmp.mqlplugin.services.properties;
 
-public interface PropertyService {
+import ir.edmp.mqlplugin.services.Service;
+
+public interface PropertyService extends Service {
 	
 	boolean checkComponent();
 

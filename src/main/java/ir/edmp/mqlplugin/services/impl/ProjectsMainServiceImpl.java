@@ -17,7 +17,7 @@ import java.io.IOException;
 
 import static ir.edmp.mqlplugin.constants.Constant.*;
 
-public class ProjectsMainServiceImpl implements ProjectsMainService {
+public class ProjectsMainServiceImpl extends ServiceImpl implements ProjectsMainService {
 
 	private final Project moduleProject;
 

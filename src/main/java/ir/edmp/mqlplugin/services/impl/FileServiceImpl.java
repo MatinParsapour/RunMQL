@@ -15,7 +15,7 @@ import java.util.*;
 
 import static ir.edmp.mqlplugin.constants.Constant.*;
 
-public class FileServiceImpl implements FileService {
+public class FileServiceImpl extends ServiceImpl implements FileService {
 
     private static FileService instance = null;
     private static Project moduleProject = null;

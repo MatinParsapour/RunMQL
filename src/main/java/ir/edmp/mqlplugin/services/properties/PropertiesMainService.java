@@ -1,6 +1,8 @@
 package ir.edmp.mqlplugin.services.properties;
 
-public interface PropertiesMainService {
+import ir.edmp.mqlplugin.services.Service;
+
+public interface PropertiesMainService extends Service {
 	
 	boolean startChecking();
 
