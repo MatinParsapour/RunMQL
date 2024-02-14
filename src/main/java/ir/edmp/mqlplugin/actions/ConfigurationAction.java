@@ -24,11 +24,10 @@ public class ConfigurationAction extends AnAction {
             ConfigurationDialog dialog = new ConfigurationDialog(username, password, location);
             boolean saveConfiguration = dialog.showAndGet();
             if (saveConfiguration) {
-                System.out.println("here");
                 Map<String, String> properties = new HashMap<>();
-                properties.put(USERNAME, username);
-                properties.put(PASSWORD, password);
-                properties.put(PROJECTS_LOCATION, location);
+                properties.put(USERNAME, dialog.getUsername().getText());
+                properties.put(PASSWORD, new String(dialog.getPassword().getPassword()));
+                properties.put(PROJECTS_LOCATION, dialog.getMqlLocation().getText());
                 fileService.write(properties);
             }
         } catch (IOException e) {
