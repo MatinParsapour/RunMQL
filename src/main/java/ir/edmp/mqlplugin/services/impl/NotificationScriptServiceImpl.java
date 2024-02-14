@@ -70,7 +70,7 @@ public class NotificationScriptServiceImpl extends ScriptServiceImpl implements 
     }
 
     private String getDynamicToList() {
-        return "\"Dynamic To List\"\"" + notificationDialog.getDynamicToList() + "\" ";
+        return "\"Dynamic To List\" \"" + notificationDialog.getDynamicToList() + "\" ";
     }
 
     private String getFilter() {

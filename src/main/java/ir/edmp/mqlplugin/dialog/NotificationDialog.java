@@ -1,6 +1,8 @@
 package ir.edmp.mqlplugin.dialog;
 
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.ui.JBColor;
+import com.intellij.util.ui.JBUI;
 import org.jdesktop.swingx.VerticalLayout;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,8 +15,8 @@ public class NotificationDialog extends DialogWrapper {
 
     private final JTextField name = new JTextField();
     private final JTextField revision = new JTextField();
-    private final JTextField bodyHTML = new JTextField();
-    private final JTextField bodyText = new JTextField();
+    private final JTextArea bodyHTML = new JTextArea();
+    private final JTextArea bodyText = new JTextArea();
     private final JTextField dynamicBCCList = new JTextField();
     private final JTextField dynamicCCList = new JTextField();
     private final JTextField dynamicToList = new JTextField();
@@ -43,8 +45,8 @@ public class NotificationDialog extends DialogWrapper {
         JPanel dialogPanel = new JPanel(new VerticalLayout());
         dialogPanel.add(addAttributeField(name, "Name : "));
         dialogPanel.add(addAttributeField(revision, "Revision : "));
-        dialogPanel.add(addAttributeField(subjectText, "Subject Text : "));
         dialogPanel.add(addAttributeField(bodyText, "Body Text : "));
+        dialogPanel.add(addAttributeField(subjectText, "Subject Text : "));
         dialogPanel.add(addAttributeField(bodyHTML, "Body HTML : "));
         dialogPanel.add(addAttributeField(dynamicToList, "Dynamic To List : "));
         dialogPanel.add(addAttributeField(filter, "Filter : "));
@@ -53,7 +55,7 @@ public class NotificationDialog extends DialogWrapper {
         dialogPanel.add(addAttributeField(dynamicCCList, "Dynamic CC List : "));
         dialogPanel.add(addAttributeField(consolidationJPO, "Consolidation JPO : "));
         dialogPanel.add(addAttributeField(attachments, "Attachments : "));
-        dialogPanel.add(addAttributeField(preprocessesJPO, "Preprocesses JPO : "));
+        dialogPanel.add(addAttributeField(preprocessesJPO, "Preprocess JPO : "));
         dialogPanel.add(addAttributeField(registeredSuite, "Registered Suite : "));
         dialogPanel.add(addAttributeField(replyTo, "Reply To : "));
         dialogPanel.add(addAttributeField(staticBCCList, "Static BCC List : "));
@@ -65,6 +67,16 @@ public class NotificationDialog extends DialogWrapper {
 
     private JPanel addAttributeField(JTextField field, String labelString) {
         field.setPreferredSize(new Dimension(250, 35));
+        JPanel fieldPanel = new JPanel(new GridLayout());
+        JLabel label = new JLabel(labelString);
+        label.setPreferredSize(new Dimension(20, 35));
+        fieldPanel.add(label);
+        fieldPanel.add(field);
+        return fieldPanel;
+    }
+    private JPanel addAttributeField(JTextArea field, String labelString) {
+        field.setPreferredSize(new Dimension(200, 150));
+        field.setMargin(JBUI.insets(10, 0));
         JPanel fieldPanel = new JPanel(new GridLayout());
         JLabel label = new JLabel(labelString);
         label.setPreferredSize(new Dimension(20, 35));
