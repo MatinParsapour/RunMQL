@@ -71,59 +71,59 @@ public class TriggerScriptServiceImpl extends ScriptServiceImpl implements Trigg
     }
 
     private String getArg2() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg2() + "\" ";
+        return "\"eService Program Argument 2\" \"" + wrapper.getArg2() + "\" ";
     }
 
     private String getArg3() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg3() + "\" ";
+        return "\"eService Program Argument 3\" \"" + wrapper.getArg3() + "\" ";
     }
 
     private String getArg4() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg4() + "\" ";
+        return "\"eService Program Argument 4\" \"" + wrapper.getArg4() + "\" ";
     }
 
     private String getArg5() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg5() + "\" ";
+        return "\"eService Program Argument 5\" \"" + wrapper.getArg5() + "\" ";
     }
 
     private String getArg6() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg6() + "\" ";
+        return "\"eService Program Argument 6\" \"" + wrapper.getArg6() + "\" ";
     }
 
     private String getArg7() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg7() + "\" ";
+        return "\"eService Program Argument 7\" \"" + wrapper.getArg7() + "\" ";
     }
 
     private String getArg8() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg8() + "\" ";
+        return "\"eService Program Argument 8\" \"" + wrapper.getArg8() + "\" ";
     }
 
     private String getArg9() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg9() + "\" ";
+        return "\"eService Program Argument 9\" \"" + wrapper.getArg9() + "\" ";
     }
 
     private String getArg10() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg10() + "\" ";
+        return "\"eService Program Argument 10\" \"" + wrapper.getArg10() + "\" ";
     }
 
     private String getArg11() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg11() + "\" ";
+        return "\"eService Program Argument 11\" \"" + wrapper.getArg11() + "\" ";
     }
 
     private String getArg12() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg12() + "\" ";
+        return "\"eService Program Argument 12\" \"" + wrapper.getArg12() + "\" ";
     }
 
     private String getArg13() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg13() + "\" ";
+        return "\"eService Program Argument 13\" \"" + wrapper.getArg13() + "\" ";
     }
 
     private String getArg14() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg14() + "\" ";
+        return "\"eService Program Argument 14\" \"" + wrapper.getArg14() + "\" ";
     }
 
     private String getArg15() {
-        return "\"eService Program Argument 1\" \"" + wrapper.getArg15() + "\" ";
+        return "\"eService Program Argument 15\" \"" + wrapper.getArg15() + "\" ";
     }
 
     private String getCurrent() {
