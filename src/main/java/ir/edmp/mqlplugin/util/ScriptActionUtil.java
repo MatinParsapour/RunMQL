@@ -19,7 +19,7 @@ public class ScriptActionUtil {
         String fileExtension = ActionsUtil.getFileExtension(event);
         boolean isFileMQL = fileExtension.equals(MQL_EXTENSION);
         if (!isFileMQL) {
-            Messages.showErrorDialog(ERROR_NO_MQL_FILE_FOUND, ERROR_SYSTEM_HANDLER);
+            Messages.showErrorDialog(ERROR_NO_MQL_FILE_FOUND, ERROR_SCRIPT);
         }
         return isFileMQL;
     }

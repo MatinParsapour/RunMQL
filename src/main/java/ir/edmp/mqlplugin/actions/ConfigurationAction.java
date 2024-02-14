@@ -2,6 +2,7 @@ package ir.edmp.mqlplugin.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.ui.Messages;
 import ir.edmp.mqlplugin.dialog.ConfigurationDialog;
 import ir.edmp.mqlplugin.services.FileService;
 import ir.edmp.mqlplugin.services.impl.FileServiceImpl;
@@ -31,6 +32,7 @@ public class ConfigurationAction extends AnAction {
                 fileService.write(properties);
             }
         } catch (IOException e) {
+            Messages.showErrorDialog(e.getMessage(), ERROR_CONFIGURATION);
             throw new RuntimeException(e);
         }
     }

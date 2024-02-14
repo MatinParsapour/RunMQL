@@ -63,7 +63,7 @@ public class FileServiceImpl extends ServiceImpl implements FileService {
         File configurationModulePath = new File(new File(moduleProject.getBasePath()).getParentFile() + "\\" + CONFIGURATION_MODULE);
         Module configurationModule = ModuleManager.getInstance(moduleProject).findModuleByName(CONFIGURATION_MODULE);
         if (!configurationModulePath.exists()) {
-            Messages.showErrorDialog(ERROR_CONFIGURATION_MODULE_NOT_FOUND, ERROR_RUN_MQL);
+            Messages.showErrorDialog(ERROR_CONFIGURATION_MODULE_NOT_FOUND, ERROR_CONFIGURATION);
             return false;
         }
 
