@@ -1,5 +1,6 @@
 package ir.edmp.mqlplugin.services.impl;
 
+import com.intellij.openapi.ui.DialogWrapper;
 import ir.edmp.mqlplugin.dialog.NotificationDialog;
 import ir.edmp.mqlplugin.services.NotificationScriptService;
 
@@ -7,10 +8,11 @@ import java.util.StringJoiner;
 
 public class NotificationScriptServiceImpl extends ScriptServiceImpl implements NotificationScriptService {
 
-    private final NotificationDialog notificationDialog;
+    private NotificationDialog notificationDialog;
 
-    public NotificationScriptServiceImpl(NotificationDialog notificationDialog) {
-        this.notificationDialog = notificationDialog;
+    @Override
+    public void init(DialogWrapper dialogWrapper) {
+        this.notificationDialog = (NotificationDialog) dialogWrapper;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ir.edmp.mqlplugin.services.impl;
 
+import com.intellij.openapi.ui.DialogWrapper;
 import ir.edmp.mqlplugin.dialog.SystemHandlerDialog;
 import ir.edmp.mqlplugin.services.SystemHandlerScriptService;
 
@@ -7,10 +8,12 @@ import java.util.StringJoiner;
 
 public class SystemHandlerScriptServiceImpl extends ScriptServiceImpl implements SystemHandlerScriptService {
 
-    private final SystemHandlerDialog wrapper;
+    private SystemHandlerDialog wrapper;
 
-    public SystemHandlerScriptServiceImpl(SystemHandlerDialog wrapper) {
-        this.wrapper = wrapper;
+
+    @Override
+    public void init(DialogWrapper dialogWrapper) {
+        this.wrapper = (SystemHandlerDialog) dialogWrapper;
     }
 
     @Override

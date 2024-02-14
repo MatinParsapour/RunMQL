@@ -1,5 +1,6 @@
 package ir.edmp.mqlplugin.services.impl;
 
+import com.intellij.openapi.ui.DialogWrapper;
 import ir.edmp.mqlplugin.dialog.TriggerDialog;
 import ir.edmp.mqlplugin.services.TriggerScriptService;
 
@@ -7,10 +8,11 @@ import java.util.StringJoiner;
 
 public class TriggerScriptServiceImpl extends ScriptServiceImpl implements TriggerScriptService {
 
-    private final TriggerDialog wrapper;
+    private TriggerDialog wrapper;
 
-    public TriggerScriptServiceImpl(TriggerDialog wrapper) {
-        this.wrapper = wrapper;
+    @Override
+    public void init(DialogWrapper dialogWrapper) {
+        this.wrapper = (TriggerDialog) dialogWrapper;
     }
 
     @Override

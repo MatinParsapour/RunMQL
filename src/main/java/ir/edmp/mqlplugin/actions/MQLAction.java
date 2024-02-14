@@ -9,6 +9,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDocumentManager;
 import ir.edmp.mqlplugin.services.ProjectsMainService;
 import ir.edmp.mqlplugin.services.impl.ProjectsMainServiceImpl;
+import ir.edmp.mqlplugin.util.ActionsUtil;
 import org.jetbrains.annotations.NotNull;
 
 import static ir.edmp.mqlplugin.constants.Constant.JAVA_EXTENSION;
@@ -18,15 +19,11 @@ public class MQLAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent event) {
-        Project moduleProject = event.getProject();
-        Editor editor = FileEditorManager.getInstance(moduleProject).getSelectedTextEditor();
-        boolean isThereEditor = editor == null;
-        if (isThereEditor) {
+        if (ActionsUtil.noEditorFound(event)) {
             return;
         }
 
-        Document currentDoc = editor.getDocument();
-        String fileExtension = PsiDocumentManager.getInstance(moduleProject).getPsiFile(currentDoc).getOriginalFile().getVirtualFile().getExtension();
+        String fileExtension = ActionsUtil.getFileExtension(event);
 
         // Check if file is java then insert it if its mql then run it
         boolean isFileJava = fileExtension.equals(JAVA_EXTENSION);
