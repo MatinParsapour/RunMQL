@@ -6,15 +6,10 @@ import ir.edmp.mqlplugin.services.PythonIntegratorService;
 import static ir.edmp.mqlplugin.constants.Constant.*;
 
 public class MQLServiceImpl extends ProjectServiceImpl implements MQLService {
-    private Project moduleProject = null;
-
-    public MQLServiceImpl(Project moduleProject) {
-        this.moduleProject = moduleProject;
-    }
 
     @Override
     public boolean validateAndUpdateSchema(String projectName, String mqlPath) {
-        PythonIntegratorService pythonIntegratorService = new PythonIntegratorServiceImpl(moduleProject);
+        PythonIntegratorService pythonIntegratorService = new PythonIntegratorServiceImpl();
         return pythonIntegratorService.runPythonFile(mqlPath, projectName, FILE_RUN_MQL);
     }
 }

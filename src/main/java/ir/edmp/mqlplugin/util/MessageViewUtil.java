@@ -16,17 +16,17 @@ import javax.swing.*;
 
 public class MessageViewUtil {
 
-    public static void displayMessage(String result, Project project) {
+    public static void displayMessage(String result) {
         JTextArea resultTextArea = new JTextArea(result);
         resultTextArea.setEditable(false);
         resultTextArea.setLineWrap(true);
         resultTextArea.setWrapStyleWord(true);
         JBScrollPane scrollPane = new JBScrollPane(resultTextArea);
 
-        Document currentDoc = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
-        String fileName = PsiDocumentManager.getInstance(project).getPsiFile(currentDoc).getOriginalFile().getVirtualFile().getName();
-        project.getService(MessageView.class);
-        ToolWindow toolWindow = ToolWindowManager.getInstance(project).getToolWindow(ToolWindowId.MESSAGES_WINDOW);
+        Document currentDoc = FileEditorManager.getInstance(ModuleProjectUtil.getInstance().getProject()).getSelectedTextEditor().getDocument();
+        String fileName = PsiDocumentManager.getInstance(ModuleProjectUtil.getInstance().getProject()).getPsiFile(currentDoc).getOriginalFile().getVirtualFile().getName();
+        ModuleProjectUtil.getInstance().getProject().getService(MessageView.class);
+        ToolWindow toolWindow = ToolWindowManager.getInstance(ModuleProjectUtil.getInstance().getProject()).getToolWindow(ToolWindowId.MESSAGES_WINDOW);
         Content content =  toolWindow.getContentManager().findContent(fileName);
         boolean fileNameContentDoesNotExists = content == null;
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();

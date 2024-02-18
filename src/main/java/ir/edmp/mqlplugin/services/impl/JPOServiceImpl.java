@@ -7,14 +7,9 @@ import static ir.edmp.mqlplugin.constants.Constant.*;
 
 public class JPOServiceImpl extends ProjectServiceImpl implements JPOService {
 
-    private Project moduleProject = null;
-    public JPOServiceImpl(Project moduleProject) {
-        this.moduleProject = moduleProject;
-    }
-
     @Override
     public boolean validateAndUpdateSchema(String projectName, String jpoPath) {
-        PythonIntegratorService pythonIntegratorService = new PythonIntegratorServiceImpl(moduleProject);
+        PythonIntegratorService pythonIntegratorService = new PythonIntegratorServiceImpl();
         return pythonIntegratorService.runPythonFile(jpoPath, projectName, FILE_INSERT_PROGRAM);
     }
 }

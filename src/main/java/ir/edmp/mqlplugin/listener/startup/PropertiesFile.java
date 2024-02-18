@@ -8,6 +8,6 @@ import org.jetbrains.annotations.NotNull;
 public class PropertiesFile implements StartupActivity {
     @Override
     public void runActivity(@NotNull Project project) {
-        FileServiceImpl.getInstance(project);
+        FileServiceImpl.getInstance();
     }
 }

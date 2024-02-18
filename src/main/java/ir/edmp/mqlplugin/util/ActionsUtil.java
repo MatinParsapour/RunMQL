@@ -11,14 +11,14 @@ public class ActionsUtil {
 
     public static boolean noEditorFound(AnActionEvent event) {
         Project moduleProject = event.getProject();
+        ModuleProjectUtil.getInstance().setProject(moduleProject);
         Editor editor = FileEditorManager.getInstance(moduleProject).getSelectedTextEditor();
         return editor == null;
     }
 
     public static String getFileExtension(AnActionEvent event) {
-        Project moduleProject = event.getProject();
-        Editor editor = FileEditorManager.getInstance(moduleProject).getSelectedTextEditor();
+        Editor editor = FileEditorManager.getInstance(ModuleProjectUtil.getInstance().getProject()).getSelectedTextEditor();
         Document currentDoc = editor.getDocument();
-        return PsiDocumentManager.getInstance(moduleProject).getPsiFile(currentDoc).getOriginalFile().getVirtualFile().getExtension();
+        return PsiDocumentManager.getInstance(ModuleProjectUtil.getInstance().getProject()).getPsiFile(currentDoc).getOriginalFile().getVirtualFile().getExtension();
     }
 }

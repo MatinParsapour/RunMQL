@@ -12,18 +12,13 @@ import ir.edmp.mqlplugin.services.ProjectService;
 import ir.edmp.mqlplugin.services.ProjectsMainService;
 import ir.edmp.mqlplugin.services.impl.properties.PropertiesMainServiceImpl;
 import ir.edmp.mqlplugin.services.properties.PropertiesMainService;
+import ir.edmp.mqlplugin.util.ModuleProjectUtil;
 
 import java.io.IOException;
 
 import static ir.edmp.mqlplugin.constants.Constant.*;
 
 public class ProjectsMainServiceImpl extends ServiceImpl implements ProjectsMainService {
-
-	private final Project moduleProject;
-
-	public ProjectsMainServiceImpl(Project moduleProject) {
-		this.moduleProject = moduleProject;
-	}
 
 	@Override
 	public boolean importJPO() {
@@ -38,7 +33,7 @@ public class ProjectsMainServiceImpl extends ServiceImpl implements ProjectsMain
 			return false;
 		}
 
-		ProjectService jpoImporter = new JPOServiceImpl(moduleProject);
+		ProjectService jpoImporter = new JPOServiceImpl();
 		String activeFileProjectName = getActiveFileProjectName();
 		return jpoImporter.validateAndUpdateSchema(activeFileProjectName, activeFilePath);
 
@@ -57,14 +52,14 @@ public class ProjectsMainServiceImpl extends ServiceImpl implements ProjectsMain
 			return false;
 		}
 
-		MQLService mqlService = new MQLServiceImpl(moduleProject);
+		MQLService mqlService = new MQLServiceImpl();
 		String activeFileProjectName = getActiveFileProjectName();
 		return mqlService.validateAndUpdateSchema(activeFileProjectName, activeFilePath);
 	}
 
 	private String getActiveFileAbsolutePath() {
-		Document currentDoc = FileEditorManager.getInstance(moduleProject).getSelectedTextEditor().getDocument();
-		String filePath = PsiDocumentManager.getInstance(moduleProject).getPsiFile(currentDoc).getOriginalFile().getVirtualFile().getPath();
+		Document currentDoc = FileEditorManager.getInstance(ModuleProjectUtil.getInstance().getProject()).getSelectedTextEditor().getDocument();
+		String filePath = PsiDocumentManager.getInstance(ModuleProjectUtil.getInstance().getProject()).getPsiFile(currentDoc).getOriginalFile().getVirtualFile().getPath();
 		boolean isThereActiveEditor = filePath.isEmpty();
 		if (isThereActiveEditor) {
 			return null;
@@ -73,8 +68,8 @@ public class ProjectsMainServiceImpl extends ServiceImpl implements ProjectsMain
 	}
 
 	private String getActiveFileProjectName() {
-		Document currentDoc = FileEditorManager.getInstance(moduleProject).getSelectedTextEditor().getDocument();
-		String moduleName = ProjectRootManager.getInstance(moduleProject).getFileIndex().getModuleForFile(PsiDocumentManager.getInstance(moduleProject).getPsiFile(currentDoc).getVirtualFile()).getName();
+		Document currentDoc = FileEditorManager.getInstance(ModuleProjectUtil.getInstance().getProject()).getSelectedTextEditor().getDocument();
+		String moduleName = ProjectRootManager.getInstance(ModuleProjectUtil.getInstance().getProject()).getFileIndex().getModuleForFile(PsiDocumentManager.getInstance(ModuleProjectUtil.getInstance().getProject()).getPsiFile(currentDoc).getVirtualFile()).getName();
 		if (moduleName.isEmpty()) {
 			return null;
 		}
@@ -83,7 +78,7 @@ public class ProjectsMainServiceImpl extends ServiceImpl implements ProjectsMain
 	}
 
 	private boolean checkConfigFile() {
-		FileService fileService = FileServiceImpl.getInstance(moduleProject);
+		FileService fileService = FileServiceImpl.getInstance();
 		String username = null;
 		String password = null;
 		String location = null;

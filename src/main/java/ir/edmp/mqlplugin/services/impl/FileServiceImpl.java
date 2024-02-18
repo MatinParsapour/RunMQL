@@ -6,6 +6,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.Messages;
 import ir.edmp.mqlplugin.services.FileService;
+import ir.edmp.mqlplugin.util.ModuleProjectUtil;
 
 import java.io.File;
 import java.io.FileReader;
@@ -18,7 +19,6 @@ import static ir.edmp.mqlplugin.constants.Constant.*;
 public class FileServiceImpl extends ServiceImpl implements FileService {
 
     private static FileService instance = null;
-    private static Project moduleProject = null;
     private static File propertiesFile = null;
 
     private FileServiceImpl() {
@@ -45,13 +45,8 @@ public class FileServiceImpl extends ServiceImpl implements FileService {
         write(properties);
     }
 
-    /**
-     * Singleton design pattern to return only on instance of file service
-     * @param moduleProject
-     * @return
-     */
-    public static FileService getInstance(Project moduleProject) {
-        FileServiceImpl.moduleProject = moduleProject;
+
+    public static FileService getInstance() {
         boolean isInstanceExists = instance != null;
         if (!isInstanceExists) {
             instance = new FileServiceImpl();
@@ -60,8 +55,8 @@ public class FileServiceImpl extends ServiceImpl implements FileService {
     }
 
     private static boolean checkConfigurationFile() throws IOException {
-        File configurationModulePath = new File(new File(moduleProject.getBasePath()).getParentFile() + "\\" + CONFIGURATION_MODULE);
-        Module configurationModule = ModuleManager.getInstance(moduleProject).findModuleByName(CONFIGURATION_MODULE);
+        File configurationModulePath = new File(new File(ModuleProjectUtil.getInstance().getProject().getBasePath()).getParentFile() + "\\" + CONFIGURATION_MODULE);
+        Module configurationModule = ModuleManager.getInstance(ModuleProjectUtil.getInstance().getProject()).findModuleByName(CONFIGURATION_MODULE);
         if (!configurationModulePath.exists()) {
             Messages.showErrorDialog(ERROR_CONFIGURATION_MODULE_NOT_FOUND, ERROR_CONFIGURATION);
             return false;

@@ -10,6 +10,7 @@ import com.intellij.psi.PsiDocumentManager;
 import ir.edmp.mqlplugin.services.ProjectsMainService;
 import ir.edmp.mqlplugin.services.impl.ProjectsMainServiceImpl;
 import ir.edmp.mqlplugin.util.ActionsUtil;
+import ir.edmp.mqlplugin.util.ModuleProjectUtil;
 import org.jetbrains.annotations.NotNull;
 
 import static ir.edmp.mqlplugin.constants.Constant.JAVA_EXTENSION;
@@ -28,7 +29,7 @@ public class MQLAction extends AnAction {
         // Check if file is java then insert it if its mql then run it
         boolean isFileJava = fileExtension.equals(JAVA_EXTENSION);
         boolean isFileMQL = fileExtension.equals(MQL_EXTENSION);
-        ProjectsMainService mainService = new ProjectsMainServiceImpl(event.getProject());
+        ProjectsMainService mainService = new ProjectsMainServiceImpl();
         if (isFileJava) {
             mainService.importJPO();
         } else if (isFileMQL) {
