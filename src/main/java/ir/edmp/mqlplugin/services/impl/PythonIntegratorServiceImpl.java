@@ -13,6 +13,8 @@ import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import ir.edmp.mqlplugin.services.FileService;
 import ir.edmp.mqlplugin.services.PythonIntegratorService;
+import ir.edmp.mqlplugin.util.MessageViewUtil;
+import ir.edmp.mqlplugin.util.NotificationUtil;
 
 import javax.swing.*;
 import java.io.*;
@@ -81,23 +83,10 @@ public class PythonIntegratorServiceImpl extends ServiceImpl implements PythonIn
                 }
                 resultFileReader.close();
 
-                JTextArea resultTextArea = new JTextArea(result.toString());
-                resultTextArea.setEditable(false);
-                resultTextArea.setLineWrap(true);
-                resultTextArea.setWrapStyleWord(true);
-                JBScrollPane scrollPane = new JBScrollPane(resultTextArea);
+                MessageViewUtil.displayMessage(result.toString(), moduleProject);
 
-                ToolWindow toolWindow = ToolWindowManager.getInstance(moduleProject).getToolWindow("MQL");
-                Document currentDoc = FileEditorManager.getInstance(moduleProject).getSelectedTextEditor().getDocument();
-                String fileName = PsiDocumentManager.getInstance(moduleProject).getPsiFile(currentDoc).getOriginalFile().getVirtualFile().getName();
-                Content content =  toolWindow.getContentManager().findContent(fileName);
-                boolean fileNameContentDoesNotExists = content == null;
-                ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-                if (!fileNameContentDoesNotExists) {
-                    content.getManager().removeContent(content, true);
-                    toolWindow.getContentManager().addContent(contentFactory.createContent(scrollPane, fileName, false));
-                } else {
-                    toolWindow.getContentManager().addContent(contentFactory.createContent(scrollPane, fileName, false));
+                if (isProcessFinishedSuccessfully) {
+                    NotificationUtil.info(MQL_RAN_SUCCESSFULLY, MQL_RAN_SUCCESSFULLY, "");
                 }
             }
             return true;

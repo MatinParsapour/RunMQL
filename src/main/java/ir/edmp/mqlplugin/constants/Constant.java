@@ -13,6 +13,9 @@ public class Constant {
 
 	public static final String DIRECTORY_LOGS = "\\logs\\";
 
+	// Successes
+	public static final String MQL_RAN_SUCCESSFULLY = "MQL Ran Successfully";
+
 	// Warnings
 	public static final String WARNING = "Warning";
 	public static final String WARNING_OVERWRITE_DOCUMENT = "Do you want to overwrite script in current file?";

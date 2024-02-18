@@ -48,7 +48,5 @@
     </actions>
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity implementation="ir.edmp.mqlplugin.listener.startup.PropertiesFile"/>
-        <toolWindow id="MQL" secondary="true" icon="AllIcons.Toolwindows.WebToolWindow" anchor="right"
-                    factoryClass="ir.edmp.mqlplugin.toolWindow.MQLDashboard" canCloseContents="true"/>
     </extensions>
 </idea-plugin>
