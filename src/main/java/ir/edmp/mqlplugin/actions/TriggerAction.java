@@ -18,7 +18,7 @@ public class TriggerAction extends AnAction {
 
         if (ScriptActionUtil.mqlFileFound(event)) {
             TriggerDialog triggerDialog = new TriggerDialog();
-            ScriptService scriptService = new TriggerScriptServiceImpl();
+            ScriptService scriptService = new TriggerScriptServiceImpl(triggerDialog);
             ScriptActionUtil.displayDialog(event, triggerDialog, scriptService);
         }
     }

@@ -8,10 +8,10 @@ import java.util.StringJoiner;
 
 public class TriggerScriptServiceImpl extends ScriptServiceImpl implements TriggerScriptService {
 
-    private TriggerDialog wrapper;
+    private final TriggerDialog wrapper;
 
-    @Override
-    public void init(DialogWrapper dialogWrapper) {
+
+    public TriggerScriptServiceImpl(DialogWrapper dialogWrapper) {
         this.wrapper = (TriggerDialog) dialogWrapper;
     }
 

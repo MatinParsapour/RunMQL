@@ -10,8 +10,7 @@ public class NotificationScriptServiceImpl extends ScriptServiceImpl implements 
 
     private NotificationDialog notificationDialog;
 
-    @Override
-    public void init(DialogWrapper dialogWrapper) {
+    public NotificationScriptServiceImpl(DialogWrapper dialogWrapper) {
         this.notificationDialog = (NotificationDialog) dialogWrapper;
     }
 

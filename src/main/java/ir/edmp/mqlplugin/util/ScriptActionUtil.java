@@ -37,7 +37,6 @@ public class ScriptActionUtil {
                     WriteCommandAction.runWriteCommandAction(moduleProject, () -> currentDoc.setText(""));
                 }
             }
-            scriptService.init(dialog);
             String script = scriptService.generateScript();
             WriteCommandAction.runWriteCommandAction(moduleProject, () -> currentDoc.insertString(currentDoc.getTextLength(), "\n" + script));
     }

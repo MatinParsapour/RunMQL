@@ -1,12 +1,11 @@
-<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M32.0845 7.94025V4H24.0203V7.9896H16.029V4H7.91553V7.94025H4V36H16.0044V32.0045C16.0058 30.9457 16.4274 29.9308 17.1766 29.1826C17.9258 28.4345 18.9412 28.0143 20 28.0143C21.0588 28.0143 22.0743 28.4345 22.8234 29.1826C23.5726 29.9308 23.9942 30.9457 23.9956 32.0045V36H36V7.94025H32.0845Z"
-          fill="url(#paint0_linear)"/>
-    <defs>
-        <linearGradient id="paint0_linear" x1="2.94192" y1="4.89955" x2="37.7772" y2="39.7345"
-                        gradientUnits="userSpaceOnUse">
-            <stop offset="0.15937" stop-color="#3BEA62"/>
-            <stop offset="0.5404" stop-color="#3C99CC"/>
-            <stop offset="0.93739" stop-color="#6B57FF"/>
-        </linearGradient>
-    </defs>
+<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" style="vector-effect: non-scaling-stroke;">
+    <title style="vector-effect: non-scaling-stroke;">Run MQL Plugin</title>
+
+    <g>
+        <title>Layer 1</title>
+        <text transform="matrix(1.92092, 0, 0, 1.49068, -0.166527, -0.213381)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_2" y="21.79487" x="0.04367" stroke-width="0" stroke="#000" fill="#222296">M</text>
+        <text transform="matrix(1.64147, 0, 0, 1.4884, -0.0974371, 0.041248)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_4" y="21.66629" x="-0.18867" stroke-width="0" stroke="#000" fill="#5c5cce">L</text>
+        <text transform="rotate(-8, 26.7572, 15.9599) matrix(1.41511, 0, 0, 1.40416, 6.23461, 3.85772)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_3" y="16.7188" x="5.83646" stroke-width="0" stroke="#000" fill="#278df4">Q</text>
+        <text transform="matrix(0.370099, 0, 0, 0.270104, 1.02581, 4.01064)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="2" id="svg_5" y="15.38983" x="0.82163" stroke-width="0" stroke="#000" fill="#ffffff">RUN</text>
+    </g>
 </svg>

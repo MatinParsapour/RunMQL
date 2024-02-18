@@ -11,8 +11,7 @@ public class SystemHandlerScriptServiceImpl extends ScriptServiceImpl implements
     private SystemHandlerDialog wrapper;
 
 
-    @Override
-    public void init(DialogWrapper dialogWrapper) {
+    public SystemHandlerScriptServiceImpl(DialogWrapper dialogWrapper) {
         this.wrapper = (SystemHandlerDialog) dialogWrapper;
     }
 
