@@ -6,13 +6,15 @@ import ir.edmp.mqlplugin.dialog.TriggerDialog;
 import ir.edmp.mqlplugin.services.ScriptService;
 import ir.edmp.mqlplugin.services.impl.TriggerScriptServiceImpl;
 import ir.edmp.mqlplugin.util.ActionsUtil;
+import ir.edmp.mqlplugin.util.ModuleProjectUtil;
 import ir.edmp.mqlplugin.util.ScriptActionUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class TriggerAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent event) {
-        if (ActionsUtil.noEditorFound(event)) {
+        ModuleProjectUtil.getInstance().addModuleProject(Thread.currentThread().getId(), ActionsUtil.setModuleData(event));
+        if (ActionsUtil.noEditorFound()) {
             return;
         }
 
