@@ -1,26 +1,29 @@
 package ir.edmp.mqlplugin.util;
+import ir.edmp.mqlplugin.entity.ModuleProject;
 
-import com.intellij.openapi.project.Project;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ModuleProjectUtil {
 
-    private Project project;
-    private static ModuleProjectUtil instance = null;
+    private Map<Long, ModuleProject> moduleProjects = new HashMap<>();
 
-    private ModuleProjectUtil(){}
+    private static ModuleProjectUtil instance;
+
+    private ModuleProjectUtil() {}
 
     public static ModuleProjectUtil getInstance() {
         if (instance == null) {
             instance = new ModuleProjectUtil();
         }
-        return instance;
+        return  instance;
     }
 
-    public Project getProject() {
-        return project;
+    public void addModuleProject(Long name, ModuleProject moduleProject) {
+        moduleProjects.put(name, moduleProject);
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public ModuleProject getModuleProject(long name) {
+        return moduleProjects.get(name);
     }
 }
