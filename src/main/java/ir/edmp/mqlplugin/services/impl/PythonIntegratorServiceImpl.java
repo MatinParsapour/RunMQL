@@ -1,26 +1,16 @@
 package ir.edmp.mqlplugin.services.impl;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.wm.ToolWindow;
-import com.intellij.openapi.wm.ToolWindowId;
-import com.intellij.openapi.wm.ToolWindowManager;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.ui.components.JBScrollPane;
-import com.intellij.ui.content.Content;
-import com.intellij.ui.content.ContentFactory;
-import com.intellij.ui.content.ContentManager;
-import com.intellij.ui.content.MessageView;
 import ir.edmp.mqlplugin.services.FileService;
 import ir.edmp.mqlplugin.services.PythonIntegratorService;
 import ir.edmp.mqlplugin.util.MessageViewUtil;
 import ir.edmp.mqlplugin.util.ModuleProjectUtil;
 import ir.edmp.mqlplugin.util.NotificationUtil;
+import ir.edmp.mqlplugin.util.ProgressIndicatorUtil;
+import org.apache.commons.io.FilenameUtils;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.Scanner;
 import java.util.StringJoiner;
@@ -39,18 +29,23 @@ public class PythonIntegratorServiceImpl extends ServiceImpl implements PythonIn
     }
 
     protected boolean saveAndRunActiveFile(String jpoName, String projectName, String pythonFileName) {
-        Document currentDoc = FileEditorManager.getInstance(ModuleProjectUtil.getInstance().getProject()).getSelectedTextEditor().getDocument();
-        FileDocumentManager.getInstance().saveDocument(currentDoc);
+        ProgressIndicatorUtil.getInstance().updateProgress(15, "Saving active file...");
+        Document currentDoc = ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getCurrentDocument();
+        ApplicationManager.getApplication().invokeLater(() -> FileDocumentManager.getInstance().saveDocument(currentDoc));
+        ProgressIndicatorUtil.getInstance().updateProgress(20, "Active file saved");
         readProperties();
         return runActiveFile(jpoName, projectName, pythonFileName);
     }
 
     protected boolean runActiveFile(String filePath, String projectName, String pythonFileName){
         try {
+            ProgressIndicatorUtil.getInstance().updateProgress(25, "Prepare to run python file", pythonFileName);
             ProcessBuilder pythonProcess = new ProcessBuilder("python", pythonFileName, "'" + filePath + "',"  + projectName + "," + this.password + "," + this.username);
             pythonProcess.directory(new File(this.projectsLocation));
+            ProgressIndicatorUtil.getInstance().updateProgress(30, "Call python file...", pythonFileName);
             Process processResult = pythonProcess.start();
             processResult.waitFor();
+            ProgressIndicatorUtil.getInstance().updateProgress(50, "Call finished");
 
             BufferedReader processResultReader = new BufferedReader(new InputStreamReader(processResult.getErrorStream()));
             StringBuilder runMQLErrorMessage = null;
@@ -61,6 +56,7 @@ public class PythonIntegratorServiceImpl extends ServiceImpl implements PythonIn
             }
 
             boolean isThereError = runMQLErrorMessage != null;
+            ProgressIndicatorUtil.getInstance().updateProgress(55, "Check if there's error running python file...", isThereError ? "Yes" : "No");
             if (isThereError) {
                 NotificationUtil.error(ERROR_UNSUCCESSFUL_MQL_RUNNING, ERROR_RUN_MQL, runMQLErrorMessage.toString());
                 return false;
@@ -72,11 +68,15 @@ public class PythonIntegratorServiceImpl extends ServiceImpl implements PythonIn
 
             }
 
-            File resultFile = new File(projectsLocation + DIRECTORY_LOGS + FILE_RESULT);
+            File file = new File(filePath);
+            String fileName = FilenameUtils.removeExtension(file.getName());
+            File resultFile = new File(projectsLocation + DIRECTORY_LOGS + fileName + ".txt");
+            ProgressIndicatorUtil.getInstance().updateProgress(60, "Reading result file...", fileName);
             if (resultFile.exists()) {
-                FileReader resultFileReader = new FileReader(projectsLocation + DIRECTORY_LOGS + FILE_RESULT);
+                FileReader resultFileReader = new FileReader(projectsLocation + DIRECTORY_LOGS + fileName + ".txt");
                 Scanner myReader = new Scanner(resultFileReader);
                 StringJoiner result = new StringJoiner("\n");
+                ProgressIndicatorUtil.getInstance().updateProgress(70, "Extracting data");
                 while(myReader.hasNextLine()) {
                     String data = myReader.nextLine();
                     result.add(data);
