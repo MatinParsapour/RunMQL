@@ -2,7 +2,6 @@ package ir.edmp.mqlplugin.services.impl;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.Messages;
 import ir.edmp.mqlplugin.services.FileService;
@@ -55,8 +54,8 @@ public class FileServiceImpl extends ServiceImpl implements FileService {
     }
 
     private static boolean checkConfigurationFile() throws IOException {
-        File configurationModulePath = new File(new File(ModuleProjectUtil.getInstance().getProject().getBasePath()).getParentFile() + "\\" + CONFIGURATION_MODULE);
-        Module configurationModule = ModuleManager.getInstance(ModuleProjectUtil.getInstance().getProject()).findModuleByName(CONFIGURATION_MODULE);
+        File configurationModulePath = new File(new File(ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getProject().getBasePath()).getParentFile() + "\\" + CONFIGURATION_MODULE);
+        Module configurationModule = ModuleManager.getInstance(ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getProject()).findModuleByName(CONFIGURATION_MODULE);
         if (!configurationModulePath.exists()) {
             Messages.showErrorDialog(ERROR_CONFIGURATION_MODULE_NOT_FOUND, ERROR_CONFIGURATION);
             return false;

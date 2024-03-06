@@ -6,6 +6,7 @@ import com.intellij.openapi.ui.Messages;
 import ir.edmp.mqlplugin.dialog.ConfigurationDialog;
 import ir.edmp.mqlplugin.services.FileService;
 import ir.edmp.mqlplugin.services.impl.FileServiceImpl;
+import ir.edmp.mqlplugin.util.ActionsUtil;
 import ir.edmp.mqlplugin.util.ModuleProjectUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +20,7 @@ public class ConfigurationAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent event) {
         try {
-            ModuleProjectUtil.getInstance().setProject(event.getProject());
+            ModuleProjectUtil.getInstance().addModuleProject(Thread.currentThread().getId(), ActionsUtil.setModuleData(event));
             FileService fileService = FileServiceImpl.getInstance();
             String username = fileService.read(USERNAME);
             String password = fileService.read(PASSWORD);
