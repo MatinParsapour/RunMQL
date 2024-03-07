@@ -30,11 +30,11 @@ public class MessageViewUtil {
             Content content =  toolWindow.getContentManager().findContent(fileName);
             boolean fileNameContentDoesNotExists = content == null;
             ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
+            Content newContent = contentFactory.createContent(scrollPane, fileName, false);
+            toolWindow.getContentManager().addContent(newContent, 0);
+            toolWindow.getContentManager().setSelectedContent(newContent);
             if (!fileNameContentDoesNotExists) {
                 content.getManager().removeContent(content, true);
-                toolWindow.getContentManager().addContent(contentFactory.createContent(scrollPane, fileName, false));
-            } else {
-                toolWindow.getContentManager().addContent(contentFactory.createContent(scrollPane, fileName, false));
             }
             toolWindow.activate(null);
         });
