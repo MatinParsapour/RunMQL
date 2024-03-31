@@ -24,20 +24,20 @@ public class PythonIntegratorServiceImpl extends ServiceImpl implements PythonIn
     protected String password = null;
 
     @Override
-    public boolean runPythonFile(String filePath, String projectName, String pythonFileName) {
-        return saveAndRunActiveFile(filePath, projectName, pythonFileName);
+    public boolean runPythonFile(String projectName, String pythonFileName) {
+        return saveAndRunActiveFile(projectName, pythonFileName);
     }
 
-    protected boolean saveAndRunActiveFile(String jpoName, String projectName, String pythonFileName) {
+    protected boolean saveAndRunActiveFile(String projectName, String script) {
         ProgressIndicatorUtil.getInstance().updateProgress(15, "Saving active file...");
         Document currentDoc = ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getCurrentDocument();
         ApplicationManager.getApplication().invokeLater(() -> FileDocumentManager.getInstance().saveDocument(currentDoc));
         ProgressIndicatorUtil.getInstance().updateProgress(20, "Active file saved");
         readProperties();
-        return runActiveFile(jpoName, projectName, pythonFileName);
+        return runActiveFile(projectName, script);
     }
 
-    protected boolean runActiveFile(String filePath, String projectName, String pythonFileName){
+    protected boolean runActiveFile(String projectName, String script){
         try {
             ProgressIndicatorUtil.getInstance().updateProgress(25, "Prepare to run python file", pythonFileName);
             ProcessBuilder pythonProcess = new ProcessBuilder("python", pythonFileName, "'" + filePath + "',"  + projectName + "," + this.password + "," + this.username);
