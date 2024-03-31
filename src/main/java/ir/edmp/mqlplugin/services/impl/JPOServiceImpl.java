@@ -7,9 +7,9 @@ import static ir.edmp.mqlplugin.constants.Constant.*;
 public class JPOServiceImpl extends ProjectServiceImpl implements JPOService {
 
     @Override
-    public boolean validateAndUpdateSchema(String projectName, String jpoPath) {
+    public boolean validateAndUpdateSchema(String projectName, String scriptOrFile) {
         MQLIntegrationService MQLIntegrationService = new MQLIntegrationServiceImpl();
-        String script = SCRIPT_INSERT_PROGRAM.replace("${JPO_NAME}", jpoPath);
+        String script = SCRIPT_INSERT_PROGRAM.replace("${JPO_NAME}", scriptOrFile);
         return MQLIntegrationService.executeMQLForCurrentFile(projectName, script);
     }
 }

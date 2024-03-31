@@ -4,5 +4,7 @@ public interface ProjectsMainService extends Service {
 
 	boolean importJPO();
 
-	boolean runMQL();
+	boolean runMQLFile();
+
+	boolean runMQLScript(String script);
 }
