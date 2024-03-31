@@ -4,16 +4,13 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import ir.edmp.mqlplugin.services.FileService;
-import ir.edmp.mqlplugin.services.PythonIntegratorService;
+import ir.edmp.mqlplugin.services.MQLIntegrationService;
 import ir.edmp.mqlplugin.util.MessageViewUtil;
 import ir.edmp.mqlplugin.util.ModuleProjectUtil;
 import ir.edmp.mqlplugin.util.NotificationUtil;
 import ir.edmp.mqlplugin.util.ProgressIndicatorUtil;
-import org.apache.commons.io.FilenameUtils;
 
 import java.io.*;
-import java.util.Scanner;
-import java.util.StringJoiner;
 
 import static ir.edmp.mqlplugin.constants.Constant.*;
 
@@ -39,64 +36,45 @@ public class MQLIntegrationServiceImpl extends ServiceImpl implements MQLIntegra
 
     protected boolean executeMQL(String projectName, String script){
         try {
-            ProgressIndicatorUtil.getInstance().updateProgress(25, "Prepare to run python file", pythonFileName);
-            ProcessBuilder pythonProcess = new ProcessBuilder("python", pythonFileName, "'" + filePath + "',"  + projectName + "," + this.password + "," + this.username);
-            pythonProcess.directory(new File(this.projectsLocation));
-            ProgressIndicatorUtil.getInstance().updateProgress(30, "Call python file...", pythonFileName);
-            Process processResult = pythonProcess.start();
-            processResult.waitFor();
-            ProgressIndicatorUtil.getInstance().updateProgress(50, "Call finished");
+            // Execute mql file in project path and run script
+            ProgressIndicatorUtil.getInstance().updateProgress(25, "Prepare to execute mql");
+            ProcessBuilder pythonProcess = new ProcessBuilder("cmd", "start", "/c", "mql.exe.lnk", "-c", "set context user " + this.username + " password " + this.password + "; " + script);
+            pythonProcess.directory(new File(this.projectsLocation + "\\" + projectName));
+            pythonProcess.redirectErrorStream(true);
+            Process process = pythonProcess.start();
+            ProgressIndicatorUtil.getInstance().updateProgress(50, "Execution finished");
 
-            BufferedReader processResultReader = new BufferedReader(new InputStreamReader(processResult.getErrorStream()));
-            StringBuilder runMQLErrorMessage = null;
-            while (processResultReader.readLine() != null) {
-                runMQLErrorMessage = new StringBuilder();
-                runMQLErrorMessage.append(processResultReader.readLine());
-                runMQLErrorMessage.append(System.getProperty("line.separator"));
+            // Reading result of execution
+            ProgressIndicatorUtil.getInstance().updateProgress(55, "Reading execution result...");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            StringBuilder builder = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                builder.append(line);
+                builder.append(System.getProperty("line.separator"));
             }
+            String result = builder.toString();
 
-            boolean isThereError = runMQLErrorMessage != null;
-            ProgressIndicatorUtil.getInstance().updateProgress(55, "Check if there's error running python file...", isThereError ? "Yes" : "No");
+            boolean isThereError = process.exitValue() == 1;
+            ProgressIndicatorUtil.getInstance().updateProgress(65, "Check if there's error running python file...", isThereError ? "Yes" : "No");
             if (isThereError) {
-                NotificationUtil.error(ERROR_UNSUCCESSFUL_MQL_RUNNING, ERROR_RUN_MQL, runMQLErrorMessage.toString());
-                return false;
-            }
-
-            boolean isProcessFinishedSuccessfully = processResult.exitValue() == 0;
-            if (!isProcessFinishedSuccessfully) {
                 displayErrorMessage();
-
             }
 
-            File file = new File(filePath);
-            String fileName = FilenameUtils.removeExtension(file.getName());
-            File resultFile = new File(projectsLocation + DIRECTORY_LOGS + fileName + ".txt");
-            ProgressIndicatorUtil.getInstance().updateProgress(60, "Reading result file...", fileName);
-            if (resultFile.exists()) {
-                FileReader resultFileReader = new FileReader(projectsLocation + DIRECTORY_LOGS + fileName + ".txt");
-                Scanner myReader = new Scanner(resultFileReader);
-                StringJoiner result = new StringJoiner("\n");
-                ProgressIndicatorUtil.getInstance().updateProgress(70, "Extracting data");
-                while(myReader.hasNextLine()) {
-                    String data = myReader.nextLine();
-                    result.add(data);
-                }
-                resultFileReader.close();
-
-                MessageViewUtil.displayMessage(result.toString());
-                if (isProcessFinishedSuccessfully) {
-                    NotificationUtil.info(MQL_RAN_SUCCESSFULLY, "MQL Ran successfully", "");
-                }
+            ProgressIndicatorUtil.getInstance().updateProgress(75, "Packing result...");
+            MessageViewUtil.displayMessage(result);
+            if (!isThereError) {
+                NotificationUtil.info(MQL_RAN_SUCCESSFULLY, "MQL Ran successfully", "");
             }
             return true;
-        } catch (IOException | InterruptedException exception) {
+        } catch (Exception exception) {
             NotificationUtil.error(ERROR_UNSUCCESSFUL_MQL_RUNNING, ERROR_RUN_MQL, exception.getMessage());
             return false;
         }
     }
 
-    protected void displayErrorMessage() throws IOException {
-        NotificationUtil.error(ERROR_RUN_MQL, ERROR_RUN_MQL, ERROR_UNSUCCESSFUL_MQL_RUNNING + ERROR_SEE_FULL_LOG.replace("${PATH}",DIRECTORY_LOGS + FILE_INSERT_PROGRAM));
+    protected void displayErrorMessage() {
+        NotificationUtil.error(ERROR_RUN_MQL, ERROR_RUN_MQL, ERROR_UNSUCCESSFUL_MQL_RUNNING);
     }
 
     protected void readProperties() {
