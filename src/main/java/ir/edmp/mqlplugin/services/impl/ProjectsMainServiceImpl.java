@@ -1,10 +1,7 @@
 package ir.edmp.mqlplugin.services.impl;
 
 import com.intellij.openapi.ui.Messages;
-import ir.edmp.mqlplugin.services.FileService;
-import ir.edmp.mqlplugin.services.MQLService;
-import ir.edmp.mqlplugin.services.ProjectService;
-import ir.edmp.mqlplugin.services.ProjectsMainService;
+import ir.edmp.mqlplugin.services.*;
 import ir.edmp.mqlplugin.services.impl.properties.PropertiesMainServiceImpl;
 import ir.edmp.mqlplugin.services.properties.PropertiesMainService;
 import ir.edmp.mqlplugin.util.ModuleProjectUtil;
@@ -36,7 +33,7 @@ public class ProjectsMainServiceImpl extends ServiceImpl implements ProjectsMain
 	}
 
 	@Override
-	public boolean runMQL() {
+	public boolean runMQLFile() {
 		boolean isConfigurationValid = checkConfigFile();
 		if (!isConfigurationValid) {
 			return false;
@@ -48,9 +45,21 @@ public class ProjectsMainServiceImpl extends ServiceImpl implements ProjectsMain
 			return false;
 		}
 
-		MQLService mqlService = new MQLServiceImpl();
+		MQLFileService mqlFileService = new MQLFileServiceImpl();
 		String activeFileProjectName = getActiveFileProjectName();
-		return mqlService.validateAndUpdateSchema(activeFileProjectName, activeFilePath);
+		return mqlFileService.validateAndUpdateSchema(activeFileProjectName, activeFilePath);
+	}
+
+	@Override
+	public boolean runMQLScript(String script) {
+		boolean isConfigurationValid = checkConfigFile();
+		if (!isConfigurationValid) {
+			return false;
+		}
+
+		MQLScriptService mqlScriptService = new MQLScriptServiceImpl();
+		String activeFileProjectName = getActiveFileProjectName();
+		return mqlScriptService.validateAndUpdateSchema(activeFileProjectName, script);
 	}
 
 	private String getActiveFileAbsolutePath() {
