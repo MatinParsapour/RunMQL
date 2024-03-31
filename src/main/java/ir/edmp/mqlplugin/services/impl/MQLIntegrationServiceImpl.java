@@ -17,14 +17,14 @@ import java.util.StringJoiner;
 
 import static ir.edmp.mqlplugin.constants.Constant.*;
 
-public class PythonIntegratorServiceImpl extends ServiceImpl implements PythonIntegratorService {
+public class MQLIntegrationServiceImpl extends ServiceImpl implements MQLIntegrationService {
 
     protected String projectsLocation = null;
     protected String username =  null;
     protected String password = null;
 
     @Override
-    public boolean runPythonFile(String projectName, String pythonFileName) {
+    public boolean executeMQLForCurrentFile(String projectName, String pythonFileName) {
         return saveAndRunActiveFile(projectName, pythonFileName);
     }
 
@@ -34,10 +34,10 @@ public class PythonIntegratorServiceImpl extends ServiceImpl implements PythonIn
         ApplicationManager.getApplication().invokeLater(() -> FileDocumentManager.getInstance().saveDocument(currentDoc));
         ProgressIndicatorUtil.getInstance().updateProgress(20, "Active file saved");
         readProperties();
-        return runActiveFile(projectName, script);
+        return executeMQL(projectName, script);
     }
 
-    protected boolean runActiveFile(String projectName, String script){
+    protected boolean executeMQL(String projectName, String script){
         try {
             ProgressIndicatorUtil.getInstance().updateProgress(25, "Prepare to run python file", pythonFileName);
             ProcessBuilder pythonProcess = new ProcessBuilder("python", pythonFileName, "'" + filePath + "',"  + projectName + "," + this.password + "," + this.username);
