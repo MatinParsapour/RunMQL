@@ -22,20 +22,6 @@ public class PropertyLocationServiceImpl extends PropertyServiceImpl implements 
 			Messages.showErrorDialog( ERROR_EMPTY_DIRECTORY, ERROR_RUN_MQL);
 			return false;
 		}
-
-		File insertProgramFile = new File(location + "\\" + FILE_INSERT_PROGRAM);
-		boolean isDirectoryContainsInsertProgramFile = insertProgramFile.exists();
-		if (!isDirectoryContainsInsertProgramFile) {
-			Messages.showErrorDialog( ERROR_INCORRECT_DIRECTORY.replace("${FILE_NAME}",FILE_INSERT_PROGRAM), ERROR_RUN_MQL);
-			return false;
-		}
-
-		File runMQLFile = new File(location + "\\" + FILE_RUN_MQL);
-		boolean isDirectoryContainsRunMQLFile = runMQLFile.exists();
-		if (!isDirectoryContainsRunMQLFile) {
-			Messages.showErrorDialog( ERROR_INCORRECT_DIRECTORY.replace("${FILE_NAME}",FILE_RUN_MQL), ERROR_RUN_MQL);
-			return false;
-		}
 		
 		boolean isNextComponentExists = this.nextProperty != null;
 		if (!isNextComponentExists) {

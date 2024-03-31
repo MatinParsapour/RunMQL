@@ -27,7 +27,6 @@ public class Constant {
 	public static final String ERROR_RUN_MQL = "Run MQL Error";
 	public static final String ERROR_NO_MQL_FILE_FOUND = "Active file is not an MQL file, select an MQL file and try again";
 	public static final String ERROR_EMPTY_DIRECTORY = "Incorrect Directory : \nDirectory of projects can not be empty";
-	public static final String ERROR_INCORRECT_DIRECTORY = "Incorrect Directory : \nThe directory must contains ${FILE_NAME} file";
 	public static final String ERROR_DEFAULT_PASSWORD = "Incorrect password : \nChange default password";
 	public static final String ERROR_EMPTY_USERNAME = "Incorrect username : \nUsername can not be empty";
 	public static final String ERROR_DEFAULT_USERNAME = "Incorrect username : \nChange default username";
@@ -37,13 +36,11 @@ public class Constant {
 	public static final String ERROR_UNABLE_TO_READ_PROPERTIES_FILE = "Error, Unable to read properties file : \n";
 	public static final String ERROR_UNABLE_TO_WRITE_PROPERTIES_FILE = "Unable to write properties file : \n";
 	public static final String ERROR_UNSUCCESSFUL_MQL_RUNNING = "Error, running mql was not successful : \n";
-	public static final String ERROR_SEE_FULL_LOG = "You can see full log in ${PATH}";
-
 
 	// Files
-	public static final String FILE_RESULT = "result.txt";
 	public static final String FILE_CONFIG = "\\Config.properties";
-	public static final String FILE_INSERT_PROGRAM = "insert_program.py";
-	public static final String FILE_RUN_MQL = "run_mql.py";
+
+	public static final String SCRIPT_INSERT_PROGRAM = "insert program ${JPO_NAME};";
+	public static final String SCRIPT_RUN_MQL_FILE = "run ${MQL_FILE};";
 
 }
