@@ -42,7 +42,13 @@ public class RunMqlThread extends Task.Backgroundable{
             mainService.importJPO();
         } else if (isFileMQL) {
             ProgressIndicatorUtil.getInstance().updateProgress(5, "Run MQL Command");
-            mainService.runMQL();
+            boolean hasSelectedText = ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getEditor().getSelectionModel().hasSelection();
+            if (hasSelectedText) {
+                String script = ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getEditor().getSelectionModel().getSelectedText();
+                mainService.runMQLScript(script);
+            } else {
+                mainService.runMQLFile();
+            }
         }
     }
 }
