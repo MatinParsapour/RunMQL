@@ -43,4 +43,8 @@ public class Constant {
 	public static final String SCRIPT_INSERT_PROGRAM = "insert program ${JPO_PATH}; print program ${JPO_NAME};";
 	public static final String SCRIPT_RUN_MQL_FILE = "run ${MQL_FILE};";
 
+	// Set context
+	public static final String SET_CONTEXT_USING_PASSWORD = "set context user ${USERNAME} password ${PASSWORD};";
+	public static final String SET_CONTEXT_WITHOUT_PASSWORD = "set context user ${USERNAME};";
+
 }

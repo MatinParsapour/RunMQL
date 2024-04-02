@@ -38,10 +38,11 @@ public class MQLIntegrationServiceImpl extends ServiceImpl implements MQLIntegra
         try {
             // Execute mql file in project path and run script
             ProgressIndicatorUtil.getInstance().updateProgress(25, "Prepare to execute mql");
-            ProcessBuilder pythonProcess = new ProcessBuilder("cmd", "start", "/c", "mql.exe.lnk", "-c", "set context user " + this.username + " password " + this.password + "; " + script);
-            pythonProcess.directory(new File(this.projectsLocation + "\\" + projectName));
-            pythonProcess.redirectErrorStream(true);
-            Process process = pythonProcess.start();
+            String context = getContextScript(this.username, this.password);
+            ProcessBuilder mqlProcess = new ProcessBuilder("cmd", "start", "/c", "mql.exe.lnk", "-c",  context + script);
+            mqlProcess.directory(new File(this.projectsLocation + "\\" + projectName));
+            mqlProcess.redirectErrorStream(true);
+            Process process = mqlProcess.start();
             ProgressIndicatorUtil.getInstance().updateProgress(50, "Execution finished");
 
             // Reading result of execution
@@ -86,5 +87,9 @@ public class MQLIntegrationServiceImpl extends ServiceImpl implements MQLIntegra
         } catch (IOException e) {
             NotificationUtil.error(ERROR_RUN_MQL, ERROR_RUN_MQL ,e.getMessage());
         }
+    }
+
+    private String getContextScript(String username, String password) {
+        return password.isEmpty() ? SET_CONTEXT_WITHOUT_PASSWORD.replace("${USERNAME}", username) : SET_CONTEXT_USING_PASSWORD.replace("${USERNAME}",username).replace("${PASSWORD}",password);
     }
 }
