@@ -1,5 +1,6 @@
 package ir.edmp.mqlplugin.thread;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
 import ir.edmp.mqlplugin.entity.ModuleProject;
@@ -9,6 +10,9 @@ import ir.edmp.mqlplugin.util.ActionsUtil;
 import ir.edmp.mqlplugin.util.ModuleProjectUtil;
 import ir.edmp.mqlplugin.util.ProgressIndicatorUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static ir.edmp.mqlplugin.constants.Constant.*;
 
@@ -42,10 +46,14 @@ public class RunMqlThread extends Task.Backgroundable{
             mainService.importJPO();
         } else if (isFileMQL) {
             ProgressIndicatorUtil.getInstance().updateProgress(5, "Run MQL Command");
-            boolean hasSelectedText = ModuleProjectUtil.getInstance().getModuleProject().getEditor().getSelectionModel().hasSelection();
-            if (hasSelectedText) {
-                String script = ModuleProjectUtil.getInstance().getModuleProject().getEditor().getSelectionModel().getSelectedText();
-                mainService.runMQLScript(script);
+            AtomicBoolean hasSelectedText = new AtomicBoolean(false);
+            AtomicReference<String> script = new AtomicReference<>();
+            ApplicationManager.getApplication().runReadAction(() -> {
+                hasSelectedText.set(ModuleProjectUtil.getInstance().getModuleProject().getEditor().getSelectionModel().hasSelection());
+                script.set(ModuleProjectUtil.getInstance().getModuleProject().getEditor().getSelectionModel().getSelectedText());
+            });
+            if (hasSelectedText.get()) {
+                mainService.runMQLScript(script.get());
             } else {
                 mainService.runMQLFile();
             }
