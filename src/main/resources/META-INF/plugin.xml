@@ -32,18 +32,23 @@
         </group>
         <action icon="/assets/configuration.png" class="ir.edmp.mqlplugin.actions.ConfigurationAction" id="runmqlsettings" text="Run MQL Settings">
             <add-to-group group-id="MQLMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt c"/>
         </action>
         <action icon="/assets/run-command.png" class="ir.edmp.mqlplugin.actions.MQLAction" id="runmql" text="Run MQL">
             <add-to-group group-id="MQLMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt i"/>
         </action>
         <action icon="/assets/trigger.png" class="ir.edmp.mqlplugin.actions.TriggerAction" id="addtriggerscript" text="Trigger">
             <add-to-group group-id="MQLMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt t"/>
         </action>
         <action icon="/assets/notification.png" class="ir.edmp.mqlplugin.actions.NotificationAction" id="addnotificationscript" text="Notification">
             <add-to-group group-id="MQLMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt n"/>
         </action>
         <action icon="/assets/handler.png" class="ir.edmp.mqlplugin.actions.SystemHandlerAction" id="addsystemhandlerscript" text="System Handler">
             <add-to-group group-id="MQLMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt s"/>
         </action>
     </actions>
     <extensions defaultExtensionNs="com.intellij">
