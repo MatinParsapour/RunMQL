@@ -54,8 +54,8 @@ public class FileServiceImpl extends ServiceImpl implements FileService {
     }
 
     private static boolean checkConfigurationFile() throws IOException {
-        File configurationModulePath = new File(new File(ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getProject().getBasePath()).getParentFile() + "\\" + CONFIGURATION_MODULE);
-        Module configurationModule = ModuleManager.getInstance(ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getProject()).findModuleByName(CONFIGURATION_MODULE);
+        File configurationModulePath = new File(new File(ModuleProjectUtil.getInstance().getModuleProject().getProject().getBasePath()).getParentFile() + "\\" + CONFIGURATION_MODULE);
+        Module configurationModule = ModuleManager.getInstance(ModuleProjectUtil.getInstance().getModuleProject().getProject()).findModuleByName(CONFIGURATION_MODULE);
         if (!configurationModulePath.exists()) {
             Messages.showErrorDialog(ERROR_CONFIGURATION_MODULE_NOT_FOUND, ERROR_CONFIGURATION);
             return false;

@@ -12,7 +12,7 @@ public class PropertiesFile implements StartupActivity {
     @Override
     public void runActivity(@NotNull Project project) {
         ModuleProject moduleProject = ModuleProjectBuilder.getInstance().setProject(project).build();
-        ModuleProjectUtil.getInstance().addModuleProject(Thread.currentThread().getId(), moduleProject);
+        ModuleProjectUtil.getInstance().addModuleProject(moduleProject);
         FileServiceImpl.getInstance();
     }
 }

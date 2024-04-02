@@ -63,7 +63,7 @@ public class ProjectsMainServiceImpl extends ServiceImpl implements ProjectsMain
 	}
 
 	private String getActiveFileAbsolutePath() {
-		String filePath = ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getCurrentDocumentPSIFile().getOriginalFile().getVirtualFile().getPath();
+		String filePath = ModuleProjectUtil.getInstance().getModuleProject().getCurrentDocumentPSIFile().getOriginalFile().getVirtualFile().getPath();
 		ProgressIndicatorUtil.getInstance().updateProgress(10, "Read active file path", filePath);
 		boolean isThereActiveEditor = filePath.isEmpty();
 		if (isThereActiveEditor) {
@@ -73,7 +73,7 @@ public class ProjectsMainServiceImpl extends ServiceImpl implements ProjectsMain
 	}
 
 	private String getActiveFileProjectName() {
-		String moduleName = ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getModuleName();
+		String moduleName = ModuleProjectUtil.getInstance().getModuleProject().getModuleName();
 		ProgressIndicatorUtil.getInstance().updateProgress(12, "Read module name", moduleName);
 		if (moduleName.isEmpty()) {
 			return null;

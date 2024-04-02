@@ -14,12 +14,12 @@ import ir.edmp.mqlplugin.entity.ModuleProject;
 public class ActionsUtil {
 
     public static boolean noEditorFound() {
-        Editor editor = ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getEditor();
+        Editor editor = ModuleProjectUtil.getInstance().getModuleProject().getEditor();
         return editor == null;
     }
 
     public static String getFileExtension() {
-        return ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getCurrentDocumentPSIFile().getOriginalFile().getVirtualFile().getExtension();
+        return ModuleProjectUtil.getInstance().getModuleProject().getCurrentDocumentPSIFile().getOriginalFile().getVirtualFile().getExtension();
     }
 
     public static ModuleProject setModuleData(AnActionEvent event) {
