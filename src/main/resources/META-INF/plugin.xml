@@ -7,14 +7,23 @@
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
     <name>RunMQL</name>
 
+    <version>1.5.0</version>
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="matin.parsapour.iam@gmail.com">Matin</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
-    <description><![CDATA[This plugin insert program which has java extension and runs mqls which has mql extension, this plugin
-                        Adds a command named "Run MQL" to Tools menu]]></description>
+    <description><![CDATA[
+      You can execute mql commands, insert JPOs, generate script for notification or trigger. <br>
+      <br>
+      Usage: <br>
+      <li><b>Select a mql file and type the command you want and press "Run MQL" command to see result for whole file in Messages tab.</b></li>
+      <li><b>Select as many lines of mql file as you want and press "Run MQL" command to see result for those lines in Messages tab.</b></li>
+      <li><b>Select a JPO and press "Run MQL" command to insert program and see result of insertion in Messages tab.</b></li>
+      <li><b>Press "Trigger" command to see a dialog, fill the fields and press ok to generate an executable script for your trigger</b></li>
+      <li><b>Press "Notification" command to see a dialog, fill the fields and press ok to generate and executable script for your notification</b></li>
+    ]]></description>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -30,23 +39,23 @@
         <group text="MQL Tools" id="MQLMenu" popup="true">
             <add-to-group group-id="ToolsMenu"/>
         </group>
-        <action icon="/assets/configuration.png" class="ir.edmp.mqlplugin.actions.ConfigurationAction" id="runmqlsettings" text="Run MQL Settings">
+        <action icon="/assets/configuration.png" class="ir.edmp.mqlplugin.actions.ConfigurationAction" id="ir.edmp.mqlplugin.actions.ConfigurationAction" text="Run MQL Settings">
             <add-to-group group-id="MQLMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt c"/>
         </action>
-        <action icon="/assets/run-command.png" class="ir.edmp.mqlplugin.actions.MQLAction" id="runmql" text="Run MQL">
+        <action icon="/assets/run-command.png" class="ir.edmp.mqlplugin.actions.MQLAction" id="ir.edmp.mqlplugin.actions.MQLAction" text="Run MQL">
             <add-to-group group-id="MQLMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt i"/>
         </action>
-        <action icon="/assets/trigger.png" class="ir.edmp.mqlplugin.actions.TriggerAction" id="addtriggerscript" text="Trigger">
+        <action icon="/assets/trigger.png" class="ir.edmp.mqlplugin.actions.TriggerAction" id="ir.edmp.mqlplugin.actions.TriggerAction" text="Trigger">
             <add-to-group group-id="MQLMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt t"/>
         </action>
-        <action icon="/assets/notification.png" class="ir.edmp.mqlplugin.actions.NotificationAction" id="addnotificationscript" text="Notification">
+        <action icon="/assets/notification.png" class="ir.edmp.mqlplugin.actions.NotificationAction" id="ir.edmp.mqlplugin.actions.NotificationAction" text="Notification">
             <add-to-group group-id="MQLMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt n"/>
         </action>
-        <action icon="/assets/handler.png" class="ir.edmp.mqlplugin.actions.SystemHandlerAction" id="addsystemhandlerscript" text="System Handler">
+        <action icon="/assets/handler.png" class="ir.edmp.mqlplugin.actions.SystemHandlerAction" id="ir.edmp.mqlplugin.actions.SystemHandlerAction" text="System Handler">
             <add-to-group group-id="MQLMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt s"/>
         </action>
