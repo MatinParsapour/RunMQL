@@ -10,6 +10,7 @@ public class MQLScriptServiceImpl extends ProjectServiceImpl implements MQLScrip
     @Override
     public boolean validateAndUpdateSchema(String projectName, String scriptOrFile) {
         MQLIntegrationService MQLIntegrationService = new MQLIntegrationServiceImpl();
+        scriptOrFile = scriptOrFile.replace("\"","\\\"");
         return MQLIntegrationService.executeMQLForCurrentFile(projectName, scriptOrFile);
     }
 }
