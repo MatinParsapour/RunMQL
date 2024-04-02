@@ -21,12 +21,12 @@ public class MessageViewUtil {
         JBScrollPane scrollPane = new JBScrollPane(resultTextArea);
         ProgressIndicatorUtil.getInstance().updateProgress(80, "Packing data...");
 
-        String fileName = ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getCurrentDocumentPSIFile().getOriginalFile().getVirtualFile().getName();
+        String fileName = ModuleProjectUtil.getInstance().getModuleProject().getCurrentDocumentPSIFile().getOriginalFile().getVirtualFile().getName();
 
         ProgressIndicatorUtil.getInstance().updateProgress(90, "Prepare to display data...");
         ApplicationManager.getApplication().invokeLaterOnWriteThread(() -> {
-            ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getProject().getService(MessageView.class);
-            ToolWindow toolWindow = ToolWindowManager.getInstance(ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getProject()).getToolWindow(ToolWindowId.MESSAGES_WINDOW);
+            ModuleProjectUtil.getInstance().getModuleProject().getProject().getService(MessageView.class);
+            ToolWindow toolWindow = ToolWindowManager.getInstance(ModuleProjectUtil.getInstance().getModuleProject().getProject()).getToolWindow(ToolWindowId.MESSAGES_WINDOW);
             Content content =  toolWindow.getContentManager().findContent(fileName);
             boolean fileNameContentDoesNotExists = content == null;
             ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();

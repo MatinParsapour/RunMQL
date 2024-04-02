@@ -27,7 +27,7 @@ public class MQLIntegrationServiceImpl extends ServiceImpl implements MQLIntegra
 
     protected boolean saveAndRunActiveFile(String projectName, String script) {
         ProgressIndicatorUtil.getInstance().updateProgress(15, "Saving active file...");
-        Document currentDoc = ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getCurrentDocument();
+        Document currentDoc = ModuleProjectUtil.getInstance().getModuleProject().getCurrentDocument();
         ApplicationManager.getApplication().invokeLater(() -> FileDocumentManager.getInstance().saveDocument(currentDoc));
         ProgressIndicatorUtil.getInstance().updateProgress(20, "Active file saved");
         readProperties();

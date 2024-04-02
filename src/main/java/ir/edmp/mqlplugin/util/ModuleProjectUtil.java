@@ -19,11 +19,11 @@ public class ModuleProjectUtil {
         return  instance;
     }
 
-    public void addModuleProject(Long name, ModuleProject moduleProject) {
-        moduleProjects.put(name, moduleProject);
+    public void addModuleProject(ModuleProject moduleProject) {
+        moduleProjects.put(Thread.currentThread().getId(), moduleProject);
     }
 
-    public ModuleProject getModuleProject(long name) {
-        return moduleProjects.get(name);
+    public ModuleProject getModuleProject() {
+        return moduleProjects.get(Thread.currentThread().getId());
     }
 }

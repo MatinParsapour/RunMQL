@@ -24,7 +24,7 @@ public class RunMqlThread extends Task.Backgroundable{
 
     @Override
     public void run(@NotNull ProgressIndicator indicator) {
-        ModuleProjectUtil.getInstance().addModuleProject(Thread.currentThread().getId(), moduleProject);
+        ModuleProjectUtil.getInstance().addModuleProject(moduleProject);
         ProgressIndicatorUtil.getInstance().addModuleProject(indicator);
         if (ActionsUtil.noEditorFound()) {
             return;
@@ -42,9 +42,9 @@ public class RunMqlThread extends Task.Backgroundable{
             mainService.importJPO();
         } else if (isFileMQL) {
             ProgressIndicatorUtil.getInstance().updateProgress(5, "Run MQL Command");
-            boolean hasSelectedText = ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getEditor().getSelectionModel().hasSelection();
+            boolean hasSelectedText = ModuleProjectUtil.getInstance().getModuleProject().getEditor().getSelectionModel().hasSelection();
             if (hasSelectedText) {
-                String script = ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getEditor().getSelectionModel().getSelectedText();
+                String script = ModuleProjectUtil.getInstance().getModuleProject().getEditor().getSelectionModel().getSelectedText();
                 mainService.runMQLScript(script);
             } else {
                 mainService.runMQLFile();

@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class NotificationAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent event) {
-        ModuleProjectUtil.getInstance().addModuleProject(Thread.currentThread().getId(), ActionsUtil.setModuleData(event));
+        ModuleProjectUtil.getInstance().addModuleProject(ActionsUtil.setModuleData(event));
         if (ActionsUtil.noEditorFound()) {
             return;
         }

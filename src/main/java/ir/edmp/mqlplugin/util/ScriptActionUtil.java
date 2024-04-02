@@ -23,7 +23,7 @@ public class ScriptActionUtil {
     }
 
     public static void displayDialog(AnActionEvent event, DialogWrapper dialog, ScriptService scriptService) {
-        Editor editor = FileEditorManager.getInstance(ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getProject()).getSelectedTextEditor();
+        Editor editor = FileEditorManager.getInstance(ModuleProjectUtil.getInstance().getModuleProject().getProject()).getSelectedTextEditor();
         Document currentDoc = editor.getDocument();
         boolean isDialogOk = dialog.showAndGet();
         if (isDialogOk) {
@@ -31,11 +31,11 @@ public class ScriptActionUtil {
             if (isFileDirty) {
                 boolean userWantsToOverwrite = Messages.showYesNoDialog(WARNING_OVERWRITE_DOCUMENT, WARNING, null) == 0;
                 if (userWantsToOverwrite) {
-                    WriteCommandAction.runWriteCommandAction(ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getProject(), () -> currentDoc.setText(""));
+                    WriteCommandAction.runWriteCommandAction(ModuleProjectUtil.getInstance().getModuleProject().getProject(), () -> currentDoc.setText(""));
                 }
             }
             String script = scriptService.generateScript();
-            WriteCommandAction.runWriteCommandAction(ModuleProjectUtil.getInstance().getModuleProject(Thread.currentThread().getId()).getProject(), () -> currentDoc.insertString(currentDoc.getTextLength(), "\n" + script));
+            WriteCommandAction.runWriteCommandAction(ModuleProjectUtil.getInstance().getModuleProject().getProject(), () -> currentDoc.insertString(currentDoc.getTextLength(), "\n" + script));
         }
     }
 }
