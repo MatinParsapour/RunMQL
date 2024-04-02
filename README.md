@@ -11,7 +11,7 @@ In order to use this plugin:
 
 3.Running plugin for the first time will asks you to change default username.
 
-4.You need to go through "Configuration" module and click right on it and click on "Reload from disk", new file will be appeared named "Configuration.properties", you need to change username and password to your username and password, this will be used for "Set context user .. " command and change the direcotry to where you put run_mql and insert_program files.
+4.You need to go through "Configuration" module and click right on it and click on "Reload from disk", new file will be appeared named "Configuration.properties", you need to change username and password to your username and password, this will be used for "Set context user .. " command and change the direcotry to where your projects folders exist.
 
 5.Now you're good to good.
 
