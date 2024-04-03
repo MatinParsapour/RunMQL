@@ -23,7 +23,7 @@ Run MQL is an intellij plugin which lets you to run mql or insert jpos
 
 ## 💻Installation
 
-Download this plugin from intellij marketplace or clone this repository and generate jar file
+clone this repository and generate jar file
 
 After installing plugin in intellij 
 
