@@ -27,6 +27,7 @@ public class Constant {
 	public static final String ERROR_RUN_MQL = "Run MQL Error";
 	public static final String ERROR_NO_MQL_FILE_FOUND = "Active file is not an MQL file, select an MQL file and try again";
 	public static final String ERROR_EMPTY_DIRECTORY = "Incorrect Directory : \nDirectory of projects can not be empty";
+	public static final String ERROR_INVALID_DIRECTORY = "Invalid directory";
 	public static final String ERROR_DEFAULT_PASSWORD = "Incorrect password : \nChange default password";
 	public static final String ERROR_EMPTY_USERNAME = "Incorrect username : \nUsername can not be empty";
 	public static final String ERROR_DEFAULT_USERNAME = "Incorrect username : \nChange default username";
@@ -36,6 +37,7 @@ public class Constant {
 	public static final String ERROR_UNABLE_TO_READ_PROPERTIES_FILE = "Error, Unable to read properties file : \n";
 	public static final String ERROR_UNABLE_TO_WRITE_PROPERTIES_FILE = "Unable to write properties file : \n";
 	public static final String ERROR_UNSUCCESSFUL_MQL_RUNNING = "Error, running mql was not successful : \n";
+	public static final String ERROR_INCORRECT_MQL_PATH = "The path for projects you entered is invalid.";
 
 	// Files
 	public static final String FILE_CONFIG = "\\Config.properties";
