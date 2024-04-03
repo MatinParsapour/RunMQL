@@ -1,9 +1,8 @@
 <div id='top' align="center">
-<p align="center"><a href="https://plm.ir" target="_blank"><img src="https://raw.githubusercontent.com/MatinParsapour/RunMQL/1681e6d76d1bb5d738bafe9e9ec1d68262d6084d/src/main/resources/META-INF/pluginIcon.svg" width="275"></a></p>
+<p align="center"><img src="https://raw.githubusercontent.com/MatinParsapour/RunMQL/1681e6d76d1bb5d738bafe9e9ec1d68262d6084d/src/main/resources/META-INF/pluginIcon.svg" width="275"></p>
 
 <p align="center">
 <a href="https://www.3ds.com/products/enovia"><img src="https://cadvision-systems.com/wp-content/uploads/2023/09/3dexperience-logo-thumbnail-with-caption.png" width="100"></a>
-<a href="https://plm.ir" target="_blank"><img src="https://plm.ir/wp-content/uploads/2024/01/1-EspadanDiamondLogo_White_NoBackgroud_NoText.png" width="125"></a>
 </p>
 
 
