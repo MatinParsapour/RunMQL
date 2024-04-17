@@ -3,8 +3,8 @@ package ir.edmp.mqlplugin.services.impl;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
-import ir.edmp.mqlplugin.services.FileService;
 import ir.edmp.mqlplugin.services.MQLIntegrationService;
+import ir.edmp.mqlplugin.settings.RunMQLSettings;
 import ir.edmp.mqlplugin.util.MessageViewUtil;
 import ir.edmp.mqlplugin.util.ModuleProjectUtil;
 import ir.edmp.mqlplugin.util.NotificationUtil;
@@ -79,14 +79,13 @@ public class MQLIntegrationServiceImpl extends ServiceImpl implements MQLIntegra
     }
 
     protected void readProperties() {
-        FileService fileService = FileServiceImpl.getInstance();
-        try {
-            username = fileService.read(USERNAME);
-            password = fileService.read(PASSWORD);
-            projectsLocation = fileService.read(PROJECTS_LOCATION);
-        } catch (IOException e) {
-            NotificationUtil.error(ERROR_RUN_MQL, ERROR_RUN_MQL ,e.getMessage());
-        }
+        RunMQLSettings settings = RunMQLSettings.getInstance();
+        username = settings.getUsername();
+        ProgressIndicatorUtil.getInstance().updateProgress(6, "Read username", username);
+        password = settings.getPassword();
+        ProgressIndicatorUtil.getInstance().updateProgress(7, "Read password");
+        projectsLocation = settings.getMqlLocation();
+        ProgressIndicatorUtil.getInstance().updateProgress(8, "Read projects path", projectsLocation);
     }
 
     private String getContextScript(String username, String password) {

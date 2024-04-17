@@ -39,10 +39,6 @@
         <group text="MQL Tools" id="MQLMenu" popup="true">
             <add-to-group group-id="ToolsMenu"/>
         </group>
-        <action icon="/assets/configuration.png" class="ir.edmp.mqlplugin.actions.ConfigurationAction" id="ir.edmp.mqlplugin.actions.ConfigurationAction" text="Run MQL Settings">
-            <add-to-group group-id="MQLMenu" anchor="last"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="alt c"/>
-        </action>
         <action icon="/assets/run-command.png" class="ir.edmp.mqlplugin.actions.MQLAction" id="ir.edmp.mqlplugin.actions.MQLAction" text="Run MQL">
             <add-to-group group-id="MQLMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt i"/>
@@ -61,6 +57,7 @@
         </action>
     </actions>
     <extensions defaultExtensionNs="com.intellij">
-        <postStartupActivity implementation="ir.edmp.mqlplugin.listener.startup.PropertiesFile"/>
+        <applicationService serviceImplementation="ir.edmp.mqlplugin.settings.RunMQLSettings"/>
+        <applicationConfigurable parentId="tools" instance="ir.edmp.mqlplugin.settings.RunMQLConfigurable" id="ir.edmp.mqlplugin.settings.RunMQLConfigurable" displayName="Run MQL Settings"/>
     </extensions>
 </idea-plugin>

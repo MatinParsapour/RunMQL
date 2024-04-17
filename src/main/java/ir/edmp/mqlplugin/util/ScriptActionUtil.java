@@ -1,6 +1,7 @@
 package ir.edmp.mqlplugin.util;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
@@ -17,7 +18,9 @@ public class ScriptActionUtil {
         String fileExtension = ActionsUtil.getFileExtension();
         boolean isFileMQL = fileExtension.equals(MQL_EXTENSION);
         if (!isFileMQL) {
-            Messages.showErrorDialog(ERROR_NO_MQL_FILE_FOUND, ERROR_SCRIPT);
+            ApplicationManager.getApplication().runReadAction(() -> {
+                Messages.showErrorDialog(ERROR_NO_MQL_FILE_FOUND, ERROR_SCRIPT);
+            });
         }
         return isFileMQL;
     }
