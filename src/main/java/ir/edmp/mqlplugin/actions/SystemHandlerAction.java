@@ -21,7 +21,7 @@ public class SystemHandlerAction extends AnAction {
         if (ScriptActionUtil.mqlFileFound(event)) {
             SystemHandlerDialog systemHandlerDialog = new SystemHandlerDialog();
             ScriptService scriptService = new SystemHandlerScriptServiceImpl(systemHandlerDialog);
-            ScriptActionUtil.displayDialog(event, systemHandlerDialog, scriptService);
+            ScriptActionUtil.insertOrDisplayScript(event, systemHandlerDialog, scriptService);
         }
     }
 }
