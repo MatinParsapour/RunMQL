@@ -21,7 +21,7 @@ public class NotificationAction extends AnAction {
         if (ScriptActionUtil.mqlFileFound(event)) {
             NotificationDialog notificationDialog = new NotificationDialog();
             ScriptService scriptService = new NotificationScriptServiceImpl(notificationDialog);
-            ScriptActionUtil.displayDialog(event, notificationDialog, scriptService);
+            ScriptActionUtil.insertOrDisplayScript(event, notificationDialog, scriptService);
         }
     }
 }
