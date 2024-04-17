@@ -8,6 +8,7 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import com.intellij.ui.content.MessageView;
+import ir.edmp.mqlplugin.entity.ModuleProject;
 
 import javax.swing.*;
 
@@ -21,12 +22,13 @@ public class MessageViewUtil {
         JBScrollPane scrollPane = new JBScrollPane(resultTextArea);
         ProgressIndicatorUtil.getInstance().updateProgress(80, "Packing data...");
 
-        String fileName = ModuleProjectUtil.getInstance().getModuleProject().getCurrentDocumentPSIFile().getOriginalFile().getVirtualFile().getName();
+        ModuleProject moduleProject = ModuleProjectUtil.getInstance().getModuleProject();
+        String fileName = moduleProject.getCurrentDocumentPSIFile().getOriginalFile().getVirtualFile().getName();
 
         ProgressIndicatorUtil.getInstance().updateProgress(90, "Prepare to display data...");
         ApplicationManager.getApplication().invokeLaterOnWriteThread(() -> {
-            ModuleProjectUtil.getInstance().getModuleProject().getProject().getService(MessageView.class);
-            ToolWindow toolWindow = ToolWindowManager.getInstance(ModuleProjectUtil.getInstance().getModuleProject().getProject()).getToolWindow(ToolWindowId.MESSAGES_WINDOW);
+            moduleProject.getProject().getService(MessageView.class);
+            ToolWindow toolWindow = ToolWindowManager.getInstance(moduleProject.getProject()).getToolWindow(ToolWindowId.MESSAGES_WINDOW);
             Content content =  toolWindow.getContentManager().findContent(fileName);
             boolean fileNameContentDoesNotExists = content == null;
             ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
