@@ -1,5 +1,6 @@
 package ir.edmp.mqlplugin.services.impl.properties;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ui.Messages;
 import ir.edmp.mqlplugin.services.properties.PropertyPasswordService;
 import ir.edmp.mqlplugin.services.properties.PropertyService;
@@ -17,7 +18,9 @@ public class PropertyPasswordServiceImpl extends PropertyServiceImpl implements 
 		String password = this.property;
 		boolean isPasswordFake = password.equals(DEFAULT_PASSWORD);
 		if (isPasswordFake) {
-			Messages.showErrorDialog( ERROR_DEFAULT_PASSWORD, ERROR_RUN_MQL);
+			ApplicationManager.getApplication().runReadAction(() -> {
+				Messages.showErrorDialog( ERROR_DEFAULT_PASSWORD, ERROR_RUN_MQL);
+			});
 			return false;
 		}
 		

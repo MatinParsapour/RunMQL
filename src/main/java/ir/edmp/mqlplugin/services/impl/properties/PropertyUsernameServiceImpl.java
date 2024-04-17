@@ -1,5 +1,6 @@
 package ir.edmp.mqlplugin.services.impl.properties;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ui.Messages;
 import ir.edmp.mqlplugin.services.properties.PropertyService;
 import ir.edmp.mqlplugin.services.properties.PropertyUsernameService;
@@ -17,13 +18,17 @@ public class PropertyUsernameServiceImpl extends PropertyServiceImpl implements 
 		String username = this.property;
 		boolean isUsernameEmpty = username.isEmpty();
 		if (isUsernameEmpty) {
-			Messages.showErrorDialog(ERROR_EMPTY_USERNAME, ERROR_RUN_MQL);
+			ApplicationManager.getApplication().runReadAction(() -> {
+				Messages.showErrorDialog(ERROR_EMPTY_USERNAME, ERROR_RUN_MQL);
+			});
 			return false;
 		}
 		
 		boolean isUsernameFake = username.equals(DEFAULT_USERNAME);
 		if (isUsernameFake) {
-			Messages.showErrorDialog( ERROR_DEFAULT_USERNAME, ERROR_RUN_MQL);
+			ApplicationManager.getApplication().runReadAction(() -> {
+				Messages.showErrorDialog( ERROR_DEFAULT_USERNAME, ERROR_RUN_MQL);
+			});
 			return false;
 		}
 		
