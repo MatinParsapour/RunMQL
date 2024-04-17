@@ -26,12 +26,9 @@ clone this repository and generate jar file
 
 After installing plugin in intellij 
 
-1. Add new module named Configuration
-2. Restart your IDE
-3. New properties file will be added to Configuration module
-4. Press `Alt + C` or click on `Run MQL Settings` to update your `username` and `password` and `Run MQL Location`
-5. Set `Run MQL Location` where your projects folders exist
-6. Each project folder must contain a shortcut of mql.exe
+1. Press `Alt + Ctrl + S` to open settings and under Tools menu select `Run MQL Settings` and update your `Run MQL Location` and `username` and `password`
+2. Set `Run MQL Location` where your projects folders exist
+3. Each project folder must contain a shortcut of mql.exe
 
 ## 🚧Consideration
 Name of modules must match with name of project folder in `Run MQL Location`
