@@ -50,6 +50,41 @@ public class SystemHandlerScriptServiceImpl extends ScriptServiceImpl implements
                 .toString();
     }
 
+    @Override
+    public String generateRawScript() {
+        StringBuilder script = new StringBuilder();
+        return script
+                .append(getAddBus())
+                .append(getPolicy())
+                .append(getVault())
+                .append(getTitle())
+                .append(getCategory())
+                .append(getProgram())
+                .append(getMethod())
+                .append(getParam1())
+                .append(getParam2())
+                .append(getParam3())
+                .append(getParam4())
+                .append(getParam5())
+                .append(getParam6())
+                .append(getParam7())
+                .append(getParam8())
+                .append(getParam9())
+                .append(getParam10())
+                .append(getParam1Type())
+                .append(getParam2Type())
+                .append(getParam3Type())
+                .append(getParam4Type())
+                .append(getParam5Type())
+                .append(getParam6Type())
+                .append(getParam7Type())
+                .append(getParam8Type())
+                .append(getParam9Type())
+                .append(getParam10Type())
+                .append(getCurrent())
+                .toString();
+    }
+
     private String getAddBus() {
         return "add bus \"XBC_SystemHandler\" \"" + wrapper.getName() + "\" - ";
     }

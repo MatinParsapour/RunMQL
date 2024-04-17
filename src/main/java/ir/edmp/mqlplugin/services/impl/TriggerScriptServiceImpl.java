@@ -44,6 +44,35 @@ public class TriggerScriptServiceImpl extends ScriptServiceImpl implements Trigg
                 .toString();
     }
 
+    @Override
+    public String generateRawScript() {
+        StringBuilder script = new StringBuilder();
+        return script
+                .append(getAddBus())
+                .append(getPolicy())
+                .append(getVault())
+                .append(getProgramName())
+                .append(getMethodName())
+                .append(getSequenceNumber())
+                .append(getArg1())
+                .append(getArg2())
+                .append(getArg3())
+                .append(getArg4())
+                .append(getArg5())
+                .append(getArg6())
+                .append(getArg7())
+                .append(getArg8())
+                .append(getArg9())
+                .append(getArg10())
+                .append(getArg11())
+                .append(getArg12())
+                .append(getArg13())
+                .append(getArg14())
+                .append(getArg15())
+                .append(getCurrent())
+                .toString();
+    }
+
     private String getAddBus() {
         return "add bus \"eService Trigger Program Parameters\" \"" + wrapper.getName() + "\" \"" + wrapper.getRevision() + "\" ";
     }
