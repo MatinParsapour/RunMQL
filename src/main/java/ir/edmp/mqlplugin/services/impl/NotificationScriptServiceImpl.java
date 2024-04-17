@@ -42,6 +42,34 @@ public class NotificationScriptServiceImpl extends ScriptServiceImpl implements 
                 .toString();
     }
 
+    @Override
+    public String generateRawScript() {
+        StringBuilder script = new StringBuilder();
+        return script
+                .append(getAddBus())
+                .append(getPolicy())
+                .append(getVault())
+                .append(getSubjectText())
+                .append(getBodyText())
+                .append(getBodyHTML())
+                .append(getDynamicToList())
+                .append(getFilter())
+                .append(getFromAgent())
+                .append(getDynamicBCCList())
+                .append(getDynamicCCList())
+                .append(getConsolidationJPO())
+                .append(getAttachments())
+                .append(getPreprocessesJPO())
+                .append(getRegisteredSuite())
+                .append(getReplyTo())
+                .append(getStaticBCCList())
+                .append(getStaticCCList())
+                .append(getStaticToList())
+                .append(getUrlSuffix())
+                .append(getCurrent())
+                .toString();
+    }
+
     private String getAddBus() {
         return "add bus Notification \"" + notificationDialog.getName() + "\" \"" + notificationDialog.getRevision() + "\" ";
     }

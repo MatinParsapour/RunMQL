@@ -33,17 +33,19 @@ public class RunMQLSettingComponent {
     private JBTextField password = new JBTextField();
     private JButton selectFolderButton = new JButton();
     private JBCheckBox printProgramImmediately = new JBCheckBox();
+    private JBCheckBox insertSchemaImmediately = new JBCheckBox();
     private JPanel panel;
 
     public RunMQLSettingComponent() {
-        this("","","", true);
+        this("","","", true, true);
     }
 
-    public RunMQLSettingComponent(String mqlLocation, String username, String password, boolean printProgramImmediately) {
+    public RunMQLSettingComponent(String mqlLocation, String username, String password, boolean printProgramImmediately, boolean insertSchemaImmediately) {
         this.mqlLocation.setText(mqlLocation);
         this.username.setText(username);
         this.password.setText(password);
         this.printProgramImmediately.setSelected(printProgramImmediately);
+        this.insertSchemaImmediately.setSelected(insertSchemaImmediately);
         createSelectFolderButton();
         createCenterPanel();
     }
@@ -78,6 +80,7 @@ public class RunMQLSettingComponent {
                 .addComponent(addProperty(username, "Username : "),1)
                 .addComponent(addProperty(password, "Password : "),1)
                 .addComponent(addProperty(printProgramImmediately, "Print JPO after inserting immediately?"), 1)
+                .addComponent(addProperty(insertSchemaImmediately, "Insert schema directly after generating script?"), 1)
                 .addComponentFillVertically(new JPanel(), 0)
                 .getPanel();
     }
@@ -137,5 +140,13 @@ public class RunMQLSettingComponent {
 
     public void setPrintProgramImmediately(boolean printProgramImmediately) {
         this.printProgramImmediately.setSelected(printProgramImmediately);
+    }
+
+    public boolean getInsertSchemaImmediately() {
+        return insertSchemaImmediately.isSelected();
+    }
+
+    public void setInsertSchemaImmediately(boolean insertSchemaImmediately) {
+        this.insertSchemaImmediately.setSelected(insertSchemaImmediately);
     }
 }
