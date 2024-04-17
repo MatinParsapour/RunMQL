@@ -1,15 +1,11 @@
 package ir.edmp.mqlplugin.services.impl;
 
-import com.intellij.openapi.ui.Messages;
 import ir.edmp.mqlplugin.services.*;
 import ir.edmp.mqlplugin.services.impl.properties.PropertiesMainServiceImpl;
 import ir.edmp.mqlplugin.services.properties.PropertiesMainService;
+import ir.edmp.mqlplugin.settings.RunMQLSettings;
 import ir.edmp.mqlplugin.util.ModuleProjectUtil;
 import ir.edmp.mqlplugin.util.ProgressIndicatorUtil;
-
-import java.io.IOException;
-
-import static ir.edmp.mqlplugin.constants.Constant.*;
 
 public class ProjectsMainServiceImpl extends ServiceImpl implements ProjectsMainService {
 
@@ -83,20 +79,13 @@ public class ProjectsMainServiceImpl extends ServiceImpl implements ProjectsMain
 	}
 
 	private boolean checkConfigFile() {
-		FileService fileService = FileServiceImpl.getInstance();
-		String username = null;
-		String password = null;
-		String location = null;
-		try {
-			username = fileService.read(USERNAME);
-			ProgressIndicatorUtil.getInstance().updateProgress(6, "Read username", username);
-			password = fileService.read(PASSWORD);
-			ProgressIndicatorUtil.getInstance().updateProgress(7, "Read password");
-			location = fileService.read(PROJECTS_LOCATION);
-			ProgressIndicatorUtil.getInstance().updateProgress(8, "Read projects path", location);
-		} catch (IOException exception) {
-			Messages.showErrorDialog(exception.getMessage(), ERROR_RUN_MQL);
-		}
+		RunMQLSettings settings = RunMQLSettings.getInstance();
+		String username = settings.getUsername();
+		ProgressIndicatorUtil.getInstance().updateProgress(6, "Read username", username);
+		String password = settings.getPassword();
+		ProgressIndicatorUtil.getInstance().updateProgress(7, "Read password");
+		String location = settings.getMqlLocation();
+		ProgressIndicatorUtil.getInstance().updateProgress(8, "Read projects path", location);
 
 		PropertiesMainService dialogMainService = new PropertiesMainServiceImpl(location, username, password);
 		return dialogMainService.startChecking();
