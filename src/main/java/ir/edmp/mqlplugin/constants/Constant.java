@@ -42,7 +42,8 @@ public class Constant {
 	// Files
 	public static final String FILE_CONFIG = "\\Config.properties";
 
-	public static final String SCRIPT_INSERT_PROGRAM = "insert program ${JPO_PATH}; print program ${JPO_NAME};";
+	public static final String SCRIPT_INSERT_PROGRAM = "insert program ${JPO_PATH};";
+	public static final String SCRIPT_PRINT_PROGRAM = " print program ${JPO_NAME} select code;";
 	public static final String SCRIPT_RUN_MQL_FILE = "run ${MQL_FILE};";
 
 	// Set context
