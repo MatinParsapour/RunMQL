@@ -1,5 +1,6 @@
 package ir.edmp.mqlplugin.services.impl.properties;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ui.Messages;
 import ir.edmp.mqlplugin.services.properties.PropertyLocationService;
 import ir.edmp.mqlplugin.services.properties.PropertyService;
@@ -19,7 +20,9 @@ public class PropertyLocationServiceImpl extends PropertyServiceImpl implements 
 		String location = this.property;
 		boolean isLocationEmpty = location.isEmpty();
 		if (isLocationEmpty) {
-			Messages.showErrorDialog( ERROR_EMPTY_DIRECTORY, ERROR_RUN_MQL);
+			ApplicationManager.getApplication().runReadAction(() -> {
+				Messages.showErrorDialog( ERROR_EMPTY_DIRECTORY, ERROR_RUN_MQL);
+			});
 			return false;
 		}
 		
