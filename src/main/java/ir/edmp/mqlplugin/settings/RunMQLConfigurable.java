@@ -20,7 +20,7 @@ public class RunMQLConfigurable implements Configurable {
     @Override
     public @Nullable JComponent createComponent() {
         RunMQLSettings settings = RunMQLSettings.getInstance();
-        settingComponent = new RunMQLSettingComponent(settings.getMqlLocation(), settings.getUsername(), settings.getPassword(), settings.isPrintProgramImmediately());
+        settingComponent = new RunMQLSettingComponent(settings.getMqlLocation(), settings.getUsername(), settings.getPassword(), settings.isPrintProgramImmediately(), settings.isInsertSchemaImmediately());
         return settingComponent.getPanel();
     }
 
@@ -31,6 +31,7 @@ public class RunMQLConfigurable implements Configurable {
         modified |= !settingComponent.getUsername().equals(settings.getUsername());
         modified |= !settingComponent.getPassword().equals(settings.getPassword());
         modified |= settingComponent.getPrintProgramImmediately() != settings.isPrintProgramImmediately();
+        modified |= settingComponent.getInsertSchemaImmediately() != settings.isInsertSchemaImmediately();
         return modified;
     }
 
@@ -41,5 +42,6 @@ public class RunMQLConfigurable implements Configurable {
         settings.setUsername(settingComponent.getUsername());
         settings.setPassword(settingComponent.getPassword());
         settings.setPrintProgramImmediately(settingComponent.getPrintProgramImmediately());
+        settings.setInsertSchemaImmediately(settingComponent.getInsertSchemaImmediately());
     }
 }
