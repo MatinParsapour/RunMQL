@@ -2,6 +2,7 @@ package ir.edmp.mqlplugin.services.impl;
 
 import ir.edmp.mqlplugin.services.JPOService;
 import ir.edmp.mqlplugin.services.MQLIntegrationService;
+import ir.edmp.mqlplugin.settings.RunMQLSettings;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -17,7 +18,12 @@ public class JPOServiceImpl extends ProjectServiceImpl implements JPOService {
         MQLIntegrationService MQLIntegrationService = new MQLIntegrationServiceImpl();
         Path path = Paths.get(scriptOrFile);
         String jpoName = path.getFileName().toString().replace("_mxJPO.java","");
-        String script = SCRIPT_INSERT_PROGRAM.replace("${JPO_PATH}", scriptOrFile).replace("${JPO_NAME}", jpoName);
-        return MQLIntegrationService.executeMQLForCurrentFile(projectName, script);
+        StringBuilder script = new StringBuilder();
+        script.append(SCRIPT_INSERT_PROGRAM.replace("${JPO_PATH}", scriptOrFile));
+        RunMQLSettings settings = RunMQLSettings.getInstance();
+        if (settings.isPrintProgramImmediately()) {
+            script.append(SCRIPT_PRINT_PROGRAM.replace("${JPO_NAME}", jpoName));
+        }
+        return MQLIntegrationService.executeMQLForCurrentFile(projectName, script.toString());
     }
 }

@@ -19,6 +19,7 @@ public class RunMQLSettings implements PersistentStateComponent<RunMQLSettings> 
     private String mqlLocation = DEFAULT_PROJECTS_DIRECTORY;
     private String username = DEFAULT_USERNAME;
     private String password = DEFAULT_PASSWORD;
+    private boolean printProgramImmediately = true;
 
     public static RunMQLSettings getInstance() {
         return ApplicationManager.getApplication().getService(RunMQLSettings.class);
@@ -56,5 +57,13 @@ public class RunMQLSettings implements PersistentStateComponent<RunMQLSettings> 
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isPrintProgramImmediately() {
+        return printProgramImmediately;
+    }
+
+    public void setPrintProgramImmediately(boolean printProgramImmediately) {
+        this.printProgramImmediately = printProgramImmediately;
     }
 }

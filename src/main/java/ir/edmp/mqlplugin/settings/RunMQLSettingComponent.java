@@ -10,6 +10,7 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.components.JBCheckBox;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBPanel;
 import com.intellij.ui.components.JBTextField;
@@ -31,16 +32,18 @@ public class RunMQLSettingComponent {
     private JBTextField username = new JBTextField();
     private JBTextField password = new JBTextField();
     private JButton selectFolderButton = new JButton();
+    private JBCheckBox printProgramImmediately = new JBCheckBox();
     private JPanel panel;
 
     public RunMQLSettingComponent() {
-        this("","","");
+        this("","","", true);
     }
 
-    public RunMQLSettingComponent(String mqlLocation, String username, String password) {
+    public RunMQLSettingComponent(String mqlLocation, String username, String password, boolean printProgramImmediately) {
         this.mqlLocation.setText(mqlLocation);
         this.username.setText(username);
         this.password.setText(password);
+        this.printProgramImmediately.setSelected(printProgramImmediately);
         createSelectFolderButton();
         createCenterPanel();
     }
@@ -74,11 +77,12 @@ public class RunMQLSettingComponent {
                 .addComponent(addMQLLocation(mqlLocation, "Run MQL Location : "),1)
                 .addComponent(addProperty(username, "Username : "),1)
                 .addComponent(addProperty(password, "Password : "),1)
+                .addComponent(addProperty(printProgramImmediately, "Print JPO after inserting immediately?"), 1)
                 .addComponentFillVertically(new JPanel(), 0)
                 .getPanel();
     }
 
-    private JBPanel addProperty(JBTextField field, String labelString) {
+    private JBPanel addProperty(JComponent field, String labelString) {
         field.setPreferredSize(new Dimension(336,35));
         JBPanel fieldPanel = new JBPanel(new HorizontalLayout());
         JBLabel label = new JBLabel(labelString);
@@ -125,5 +129,13 @@ public class RunMQLSettingComponent {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public boolean getPrintProgramImmediately() {
+        return printProgramImmediately.isSelected();
+    }
+
+    public void setPrintProgramImmediately(boolean printProgramImmediately) {
+        this.printProgramImmediately.setSelected(printProgramImmediately);
     }
 }
