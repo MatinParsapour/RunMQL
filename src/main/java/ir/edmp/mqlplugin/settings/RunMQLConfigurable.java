@@ -44,4 +44,14 @@ public class RunMQLConfigurable implements Configurable {
         settings.setPrintProgramImmediately(settingComponent.getPrintProgramImmediately());
         settings.setInsertSchemaImmediately(settingComponent.getInsertSchemaImmediately());
     }
+
+    @Override
+    public void reset() {
+        RunMQLSettings settings = RunMQLSettings.getInstance();
+        settingComponent.setPassword(settings.getPassword());
+        settingComponent.setUsername(settings.getUsername());
+        settingComponent.setMqlLocation(settings.getMqlLocation());
+        settingComponent.setInsertSchemaImmediately(settings.isInsertSchemaImmediately());
+        settingComponent.setPrintProgramImmediately(settings.isPrintProgramImmediately());
+    }
 }
